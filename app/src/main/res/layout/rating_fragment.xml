@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.dashboard.Rating.RatingFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="fill_parent">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/editTextspare"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Company Name" />
+            <EditText
+                android:id="@+id/editText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Company Name" />
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:layout_weight="1"
+                android:text="Would you like to display your name Will never be disclosed to anyone"
+                android:textColor="@color/colorText" />
+
+            <RadioGroup
+                android:id="@+id/RadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/radioButton5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Self name" />
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/radioButton6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Alias name/Unknown" />
+
+
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:text="We will ask some few questions for rating purpose please fill it."
+                android:textColor="@color/colorText" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:text="*Your Company Name"
+                android:textColor="@color/colorText" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:text="* Rate the Work pressure involved this quater"
+                android:textColor="@color/colorText" />
+
+
+            <include layout="@layout/common_layout" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp">
+
+                <TextView
+                    android:layout_width="60sp"
+                    android:layout_height="wrap_content"
+
+                    android:text="Very High" />
+
+                <TextView
+                    android:layout_width="60sp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+
+                    android:text="High" />
+
+                <TextView
+                    android:layout_width="55dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+
+                    android:text="Normal" />
+
+                <TextView
+                    android:layout_width="50sp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+
+                    android:text="Less" />
+
+                <TextView
+                    android:layout_width="80sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10sp"
+
+                    android:text="Very Less" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:text="* How the Infrastructure at office (furniture,Connectivity..)"
+                android:textColor="@color/colorText" />
+
+            <include layout="@layout/common_layout" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp">
+
+                <TextView
+                    android:layout_width="60sp"
+                    android:layout_height="wrap_content"
+
+                    android:text="Worst" />
+
+                <TextView
+                    android:layout_width="60sp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Better" />
+
+                <TextView
+                    android:layout_width="66dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Normal" />
+
+                <TextView
+                    android:layout_width="60sp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Good" />
+
+                <TextView
+                    android:layout_width="60sp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Great" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:text="* Has Shuttles and Cabs for pick up and drops "
+                android:textColor="@color/colorText" />
+
+            <include layout="@layout/common_layout" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp">
+
+                <TextView
+                    android:layout_width="40sp"
+                    android:layout_height="wrap_content"
+
+                    android:text="Never" />
+
+                <TextView
+                    android:layout_width="60sp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="20dp"
+                    android:text="Some Times" />
+
+                <TextView
+                    android:layout_width="66dp"
+                    android:layout_height="match_parent"
+
+
+                    android:text="Only Night shifts" />
+
+                <TextView
+                    android:layout_width="50sp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginLeft="20sp"
+
+                    android:text="Occasional" />
+
+                <TextView
+                    android:layout_width="70sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10sp"
+
+
+                    android:text="Dialy" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:text="* Has Power Backup?(UPS/Invertor and Generator)"
+                android:textColor="@color/colorText" />
+
+            <include layout="@layout/radio_layout" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:text="* Has a sports area/gym area"
+                android:textColor="@color/colorText" />
+
+            <include layout="@layout/radio_layout" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:text="* Frequently conducts Fun events"
+                android:textColor="@color/colorText" />
+
+            <include layout="@layout/common_layout" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp">
+
+                <TextView
+                    android:layout_width="60sp"
+                    android:layout_height="wrap_content"
+
+                    android:text="Weekly" />
+
+                <TextView
+                    android:layout_width="60sp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+
+                    android:text="Monthly" />
+
+                <TextView
+                    android:layout_width="55dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+
+                    android:text="Quaterly" />
+
+                <TextView
+                    android:layout_width="80sp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10sp"
+
+                    android:text="Very Often" />
+
+                <TextView
+                    android:layout_width="80sp"
+                    android:layout_height="wrap_content"
+
+
+                    android:text="Never" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:text="* How difficult is the hiring exam and interview"
+                android:textColor="@color/colorText" />
+
+            <include layout="@layout/common_layout" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp">
+
+                <TextView
+                    android:layout_width="60sp"
+                    android:layout_height="wrap_content"
+
+                    android:text="Very Easy" />
+
+                <TextView
+                    android:layout_width="60sp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Easy" />
+
+                <TextView
+                    android:layout_width="66dp"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:text="Medium" />
+
+                <TextView
+                    android:layout_width="60sp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Hard" />
+
+                <TextView
+                    android:layout_width="60sp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Killer" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:text="* Leadership is easily contactable"
+                android:textColor="@color/colorText" />
+
+            <RadioGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/radioLeaderYes"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10sp"
+                    android:text="Yes" />
+
+                <RadioButton
+                    android:id="@+id/radioLeaderNo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10sp"
+                    android:text="No"
+
+                    />
+
+                <RadioButton
+                    android:id="@+id/noLeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10sp"
+                    android:text="No leaders at work here" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="20sp"
+                android:text="* Does the CEO speak regularly to you or the entire staff through emails"
+                android:textColor="@color/colorText" />
+
+            <include layout="@layout/radio_layout" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:text="* Has a separate section for child care?"
+                android:textColor="@color/colorText" />
+
+            <include layout="@layout/radio_layout" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="20sp"
+                android:text="Finally Rate your Employer"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <RatingBar
+                android:id="@+id/ratingBar"
+                android:layout_width="254dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="20dp"
+                android:background="@color/ratingColor"
+                android:numStars="5"
+                android:padding="10dp"
+                android:theme="@style/RatingBar" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Note :you will be rating for the next quarterly again" />
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/submit"
+                android:text="Submit"
+
+
+                android:textColor="@color/white" />
+            <EditText
+                android:id="@+id/editTextspare2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:text="Company Name" />
+        </LinearLayout>
+
+    </ScrollView>
+
+</FrameLayout>

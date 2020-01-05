@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:id="@+id/fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/rate"
+                android:layout_width="120dp"
+                android:layout_height="160dp"
+                android:layout_margin="5dp"
+                android:background="@color/cardview_dark_background"
+                card_view:cardElevation="600dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/backcolor"
+                        android:src="@drawable/ic_people_black_24dp" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="60dp"
+                        android:text="Rate your employee" />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/pooling"
+                android:layout_width="120dp"
+                android:layout_height="160dp"
+                android:layout_margin="5dp"
+                android:background="@color/cardview_dark_background">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/backcolor"
+                        android:src="@drawable/ic_directions_car_black_24dp" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="60dp"
+                        android:text="Pool your car" />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/wellbeing"
+                android:layout_width="120dp"
+                android:layout_height="160dp"
+                android:layout_margin="5dp"
+                android:background="@color/cardview_dark_background">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/backcolor"
+                        android:src="@drawable/ic_sentiment_very_satisfied_black_24dp" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="60dp"
+                        android:text="Employee well being corner" />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/woman"
+                android:layout_width="120dp"
+                android:layout_height="160dp"
+                android:layout_margin="5dp"
+                android:background="@color/cardview_dark_background">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:background="@drawable/backcolor"
+                        android:src="@drawable/ic_woman" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="60dp"
+                        android:text="Working women's corner" />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/corporate"
+                android:layout_width="120dp"
+                android:layout_height="160dp"
+                android:layout_margin="5dp"
+                android:background="@color/cardview_dark_background">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/backcolor"
+                        android:src="@drawable/ic_insert_drive_file_black_24dp" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="60dp"
+                        android:text="Corporate forum" />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/smile"
+                android:layout_width="120dp"
+                android:layout_height="160dp"
+                android:layout_margin="5dp"
+                android:background="@color/cardview_dark_background">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/backcolor"
+                        android:src="@drawable/ic_sentiment_satisfied_black_24dp" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="60dp"
+                        android:text="Smile please" />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/lonely"
+                android:layout_width="120dp"
+                android:layout_height="160dp"
+                android:layout_margin="5dp"
+                android:background="@color/cardview_dark_background">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/backcolor"
+                        android:src="@drawable/ic_sentiment_dissatisfied_black_24dp" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="60dp"
+                        android:text="Feeling lonely" />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/security"
+                android:layout_width="120dp"
+                android:layout_height="160dp"
+                android:layout_margin="10dp"
+                android:background="@color/cardview_dark_background">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/backcolor"
+                        android:src="@drawable/ic_vpn_lock_black_24dp" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="60dp"
+                        android:text="Job security" />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/partner"
+                android:layout_width="120dp"
+                android:layout_height="160dp"
+                android:layout_margin="5dp"
+                android:background="@color/cardview_dark_background">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:background="@drawable/backcolor"
+                        android:src="@drawable/ic_thumbs_up_down_black_24dp" />
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="60dp"
+                        android:text="Partner with us" />
+
+                </LinearLayout>
+
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
