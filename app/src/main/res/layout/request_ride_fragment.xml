@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.dashboard.CarPooling.RequestRideFragment">
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:orientation="vertical">
+       <Button
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"/>
+       <com.google.android.material.textfield.TextInputLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:textColorHint="@color/black">
+           <AutoCompleteTextView
+               android:id="@+id/requestSource"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Source"
+               android:imeOptions="actionNext"
+               android:inputType="textNoSuggestions"
+               android:maxLines="1"
+               android:textColor="@color/black"
+               android:textColorHint="@color/black"
+               android:textIsSelectable="false"
+               android:textSize="12sp"
+               android:textStyle="bold" />
+       </com.google.android.material.textfield.TextInputLayout>
+       <com.google.android.material.textfield.TextInputLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:textColorHint="@color/black">
+           <AutoCompleteTextView
+               android:id="@+id/requestDestination"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:hint="Destination"
+               android:imeOptions="actionNext"
+               android:inputType="textNoSuggestions"
+               android:maxLines="1"
+               android:textColor="@color/black"
+               android:textColorHint="@color/black"
+               android:textIsSelectable="false"
+               android:textSize="12sp"
+               android:textStyle="bold" />
+       </com.google.android.material.textfield.TextInputLayout>
+       <Button
+           android:id="@+id/request_ride_button"
+           style="?android:textAppearanceMedium"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginTop="16dp"
+           android:background="@color/blue"
+
+           android:text="Search"
+           android:textColor="@color/white"
+           android:textStyle="bold" />
+       <TextView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:id="@+id/noResultMessage"/>
+   <RelativeLayout
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/request_recyclerView"
+
+        android:layout_below="@+id/welcome_msg">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+   </RelativeLayout>
+
+   </LinearLayout>
+
+
+</RelativeLayout>

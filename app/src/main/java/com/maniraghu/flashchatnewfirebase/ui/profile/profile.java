@@ -36,16 +36,17 @@ public class profile extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseDatabase mFirebaseDatabase;
-    private DatabaseReference myRef;
+    public DatabaseReference myRef;
     private String userId;
-
+    public String userName;
     Button l;
     private ExpandableListView listView;
     private ExpandableList listAdapter;
     private List<String> listDataHeader;
     private HashMap<String,List<String>> listHash;
-    private TextView tvUser;
+    public TextView tvUser;
     private  TextView comReg;
+    public  FirebaseUser user;
     public static profile newInstance() {
         return new profile();
     }
@@ -64,7 +65,7 @@ public class profile extends Fragment {
         mAuth=FirebaseAuth.getInstance();
         mFirebaseDatabase=FirebaseDatabase.getInstance();
         myRef=mFirebaseDatabase.getReference();
-        FirebaseUser user=mAuth.getCurrentUser();
+        user=mAuth.getCurrentUser();
         userId=user.getUid();
 
         myRef.addValueEventListener(new ValueEventListener() {
@@ -133,11 +134,15 @@ public class profile extends Fragment {
                 userInformation.setCompanyname(ds.child(userId).getValue(UserInformation.class).getCompanyname());
                 userInformation.setRegion(ds.child(userId).getValue(UserInformation.class).getRegion());
 
-                if (userInformation.getUsername() != null)
+
+                if (userInformation.getUsername() != null) {
                     tvUser.setText(userInformation.getUsername());
+                    userName = userInformation.getUsername();
+                }
                 else {
                     Intent in = getActivity().getIntent();
                     String email = in.getStringExtra("email");
+                    userName=email;
                     tvUser.setText(email);
                 }
 

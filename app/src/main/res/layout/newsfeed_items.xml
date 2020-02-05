@@ -4,15 +4,14 @@
 
     android:layout_height="wrap_content"
     android:layout_width="match_parent"
-    android:layout_margin="10dp"
+    android:layout_margin="5dp"
     >
 
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@color/cyan">
+            android:layout_margin="2dp">
             <ImageView
                 android:layout_width="150dp"
                 android:layout_height="150dp"
@@ -28,7 +27,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/img_title"
                     android:layout_margin="5dp"
-                    android:background="@color/blue"
+
                     android:textStyle="bold"
                     android:textColor="#000"
                     android:text="Post Title"/>
@@ -37,8 +36,8 @@
                     android:id="@+id/img_desc"
                     android:layout_height="50dp"
                     android:layout_margin="5dp"
-                    android:textStyle="bold"
-                    android:textColor="#000"
+
+                    android:textColor="@color/gray"
                     android:text="Description"/>
             </LinearLayout>
         </LinearLayout>

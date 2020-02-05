@@ -1,6 +1,7 @@
 package com.maniraghu.flashchatnewfirebase.ui.home;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,7 +34,7 @@ public class NewsFeed extends RecyclerView.Adapter<NewsFeed.NewsFeedViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull NewsFeedViewHolder holder, int position) {
-        NewsInformation current=mNews.get(position);
+        final NewsInformation current=mNews.get(position);
         holder.desc.setText(current.getDesc());
         holder.title.setText(current.getTitle());
         Picasso.with(mContext)
@@ -42,6 +43,14 @@ public class NewsFeed extends RecyclerView.Adapter<NewsFeed.NewsFeedViewHolder> 
                 .fit()
                 .centerCrop()
                 .into(holder.imgView);
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent next=new Intent(mContext,SinglePostActivity.class);
+                next.putExtra("post",current.getTitle());
+                mContext.startActivity(next);
+            }
+        });
     }
 
     @Override
@@ -50,15 +59,16 @@ public class NewsFeed extends RecyclerView.Adapter<NewsFeed.NewsFeedViewHolder> 
     }
 
     public  class NewsFeedViewHolder extends RecyclerView.ViewHolder{
+        View mView;
         public TextView title;
         public TextView desc;
         public ImageView imgView;
         public NewsFeedViewHolder(View itemView) {
             super(itemView);
+            mView=itemView;
             title = itemView.findViewById(R.id.img_title);
             desc = itemView.findViewById(R.id.img_desc);
             imgView = itemView.findViewById(R.id.news_image);
         }
-
     }
 }

@@ -166,13 +166,14 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="100dp"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/rel2">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            >
 
             <Button
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
@@ -204,15 +205,6 @@
                 android:textAlignment="viewStart"
                 android:theme="@style/FlatButton" />
             <Button
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:padding="8dp"
-                android:text="About Us >"
-                android:textAlignment="viewStart"
-                android:theme="@style/FlatButton" />
-            <Button
                 android:id="@+id/button"
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="match_parent"
@@ -223,6 +215,16 @@
                 android:text="Logout"
                 android:textAlignment="viewStart"
                 android:theme="@style/FlatButton" />
+            <Button
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:padding="8dp"
+                android:text="About Us >"
+                android:textAlignment="viewStart"
+                android:theme="@style/FlatButton" />
+
         </LinearLayout>
     </ScrollView>
 
