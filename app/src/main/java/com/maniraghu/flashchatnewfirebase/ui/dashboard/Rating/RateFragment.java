@@ -19,12 +19,13 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.maniraghu.flashchatnewfirebase.BaseFragment;
 import com.maniraghu.flashchatnewfirebase.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class RateFragment extends Fragment {
+public class RateFragment extends BaseFragment {
 
 
 

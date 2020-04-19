@@ -1,13 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.dashboard.JobSecurity.JobSecurity">
 
+    android:layout_margin="10dp"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:textSize="30dp"
+
+        android:text="Find Jobs here."
+        android:id="@+id/doctor"/>
+
+    <ProgressBar
+        android:id="@+id/job_progress_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
+
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:id="@+id/job_recyclerview"
 
-</FrameLayout>
+        android:layout_below="@+id/doctor">
+
+    </androidx.recyclerview.widget.RecyclerView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+
+        android:textSize="30dp"
+        android:layout_below="@id/job_recyclerview"
+
+        android:id="@+id/no_jobs_msg"/>
+
+</RelativeLayout>

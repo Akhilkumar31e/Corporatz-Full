@@ -9,6 +9,12 @@ public class UserInformation {
     public UserInformation() {
     }
 
+    public UserInformation(String username, String companyname, String region) {
+        this.username = username;
+        this.companyname = companyname;
+        this.region = region;
+    }
+
     public String getUsername() {
         return username;
     }

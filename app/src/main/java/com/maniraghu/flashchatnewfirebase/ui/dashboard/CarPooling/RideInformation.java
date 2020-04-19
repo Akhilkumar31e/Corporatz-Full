@@ -1,11 +1,11 @@
 package com.maniraghu.flashchatnewfirebase.ui.dashboard.CarPooling;
 
 public class RideInformation {
-    private String cost,destination,freeOrD,gender,mobile,nameOfPooler,source,time,type;
+    private String cost,destination,freeOrD,gender,mobile,nameOfPooler,source,time,type,userId,rideId;
     public RideInformation() {
     }
 
-    public RideInformation(String cost, String destination, String freeOrD, String gender, String mobile, String nameOfPooler, String source, String time, String type) {
+    public RideInformation(String cost, String destination, String freeOrD, String gender, String mobile, String nameOfPooler, String source, String time, String type, String userId, String rideId) {
         this.cost = cost;
         this.destination = destination;
         this.freeOrD = freeOrD;
@@ -15,6 +15,24 @@ public class RideInformation {
         this.source = source;
         this.time = time;
         this.type = type;
+        this.userId = userId;
+        this.rideId = rideId;
+    }
+
+    public String getRideId() {
+        return rideId;
+    }
+
+    public void setRideId(String rideId) {
+        this.rideId = rideId;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     public String getCost() {

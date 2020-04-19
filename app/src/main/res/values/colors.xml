@@ -23,6 +23,6 @@
     <color name="cyan">#00ced1</color>
     <color name="cadet_blue">#5f9ea0</color>
     <color name="deep_blue">#00bfff</color>
-
+    <color name="sectionTitleColor">#007aff</color>
     <color name="pink">#ff69b4</color>
 </resources>

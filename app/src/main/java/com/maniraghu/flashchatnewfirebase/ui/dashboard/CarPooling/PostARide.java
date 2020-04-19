@@ -22,10 +22,13 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.maniraghu.flashchatnewfirebase.R;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class PostARide extends Fragment {
 
     private PostArideViewModel mViewModel;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase,mHistoryDatabase,ref;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private AutoCompleteTextView username;
@@ -58,8 +61,10 @@ public class PostARide extends Fragment {
         mViewModel = ViewModelProviders.of(this).get(PostArideViewModel.class);
         // TODO: Use the ViewModel
         mDatabase = FirebaseDatabase.getInstance().getReference("poolInfo");
+
         mAuth=FirebaseAuth.getInstance();
         currUser=mAuth.getCurrentUser();
+        mHistoryDatabase = FirebaseDatabase.getInstance().getReference("history");
         username=(AutoCompleteTextView)getActivity().findViewById(R.id.nameOfPooler);
         freeOrDonate=(RadioGroup)getActivity().findViewById(R.id.radio_freeOrNot);
 
@@ -83,9 +88,14 @@ public class PostARide extends Fragment {
                 selected=CarOrBike.getCheckedRadioButtonId();
                 radioCOB=(RadioButton)getActivity().findViewById(selected);
                 String t=time.getCurrentHour()+":"+time.getCurrentMinute();
-                Ride ride=new Ride(currUser.getUid(),username.getText().toString(),radioFOD.getText().toString(),price.getText().toString(),radioGender.getText().toString(),radioCOB.getText().toString(),source.getText().toString(),destination.getText().toString(),t,mobile.getText().toString());
                 String uploadId=mDatabase.push().getKey();
+                Ride ride=new Ride(currUser.getUid(),username.getText().toString(),radioFOD.getText().toString(),price.getText().toString(),radioGender.getText().toString(),radioCOB.getText().toString(),source.getText().toString(),destination.getText().toString(),t,mobile.getText().toString(),uploadId.toString());
+
                 mDatabase.child(uploadId).setValue(ride);
+                mHistoryDatabase.child(currUser.getUid()).child(uploadId).setValue(ride);
+                Map<String,Object> map=new HashMap<>();
+                map.put("status","open");
+                mHistoryDatabase.child(currUser.getUid()).child(uploadId).updateChildren(map);
                 Toast.makeText(getActivity(),"Successfully posted your ride",Toast.LENGTH_LONG).show();
             }
         });

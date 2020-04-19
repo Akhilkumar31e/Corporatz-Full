@@ -64,7 +64,7 @@ public class profile extends Fragment {
         // TODO: Use the ViewModel
         mAuth=FirebaseAuth.getInstance();
         mFirebaseDatabase=FirebaseDatabase.getInstance();
-        myRef=mFirebaseDatabase.getReference();
+        myRef=mFirebaseDatabase.getReference("Users");
         user=mAuth.getCurrentUser();
         userId=user.getUid();
 
@@ -126,8 +126,8 @@ public class profile extends Fragment {
 
     }
 
-    private void read(DataSnapshot dataSnapshot){
-        for(DataSnapshot ds:dataSnapshot.getChildren()){
+    private void read(DataSnapshot ds){
+
             UserInformation userInformation=new UserInformation();
             if(ds.child(userId).exists()) {
                 userInformation.setUsername(ds.child(userId).getValue(UserInformation.class).getUsername());
@@ -148,6 +148,6 @@ public class profile extends Fragment {
 
                 comReg.setText(userInformation.getCompanyname() + "," + userInformation.getRegion());
             }
-        }
+
     }
 }

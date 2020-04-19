@@ -1,13 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.CorporateForum.CorpForum">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/lin_forum">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Corporate Forum"
+            android:textStyle="bold"
+            android:textSize="40dp"/>
+        <EditText
+            android:id="@+id/queryText"
+            android:layout_margin="10sp"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:hint="Post a query"
+            android:background="@drawable/edittext"
+            >
+            <requestFocus />
+        </EditText>
+        <Button
+            android:id="@+id/query_post_button"
+            style="?android:textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:background="@color/blue"
+            android:text="Post Query"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
+    <ProgressBar
+        android:id="@+id/query_progress_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"/>
 
-</FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/query_recyclerview"
+
+        android:layout_below="@+id/lin_forum">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+</RelativeLayout>

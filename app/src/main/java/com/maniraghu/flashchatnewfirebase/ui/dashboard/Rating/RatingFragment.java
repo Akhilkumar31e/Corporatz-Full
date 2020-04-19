@@ -9,6 +9,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RatingBar;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +19,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.maniraghu.flashchatnewfirebase.R;
 
 
@@ -23,7 +30,10 @@ public class RatingFragment extends Fragment implements View.OnClickListener {
 
     private RatingViewModel mViewModel;
     String nameOfEmployee;
-
+    DatabaseReference databaseReference;
+    FirebaseAuth mAuth;
+    FirebaseUser mUser;
+    Button submit;
     public static RatingFragment newInstance() {
         return new RatingFragment();
     }
@@ -39,6 +49,16 @@ public class RatingFragment extends Fragment implements View.OnClickListener {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(RatingViewModel.class);
         // TODO: Use the ViewModel
+        databaseReference= FirebaseDatabase.getInstance().getReference("ratingInfo");
+        mAuth=FirebaseAuth.getInstance();
+        mUser=mAuth.getCurrentUser();
+        submit=getActivity().findViewById(R.id.submit_rating);
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                database(view);
+            }
+        });
         RadioButton selfName= getView().findViewById(R.id.radioButton5);
         selfName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,5 +236,26 @@ public class RatingFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         takeNum(view);
+    }
+
+    public void database(View view){
+        RatingBar rating=(RatingBar)getActivity().findViewById(R.id.ratingBar);
+        //add rating to database
+        final TextView comName=(TextView) getActivity().findViewById(R.id.tvCom);
+        final EditText name=(EditText)getActivity().findViewById(R.id.companyName);
+        String companyName=name.getText().toString();
+        comName.setText(companyName);
+        Log.d("companyName",companyName);
+
+        //add companyName to database
+        Float ratingVal=rating.getRating();
+        Log.d("rating",ratingVal+"");
+        TextView comRating=(TextView)getActivity().findViewById(R.id.finalView);
+        comRating.setText(ratingVal+"");
+
+        String uploadId=databaseReference.push().getKey();
+        Rating r=new Rating(companyName,ratingVal.toString(),mUser.getUid().toString());
+        databaseReference.child(uploadId).setValue(r);
+        Toast.makeText(getActivity(),"Successfully posted your rating",Toast.LENGTH_LONG).show();
     }
 }

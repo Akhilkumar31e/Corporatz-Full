@@ -42,10 +42,11 @@ public class SecondActivity extends BaseActivity implements EventListener, Botto
         //NavigationUI.setupWithNavController(navView, navController);
 
        navView.setOnNavigationItemSelectedListener(this);
-        fm.beginTransaction().add(R.id.nav_host_fragment, fragment4, "4").hide(fragment4).commit();
-        fm.beginTransaction().add(R.id.nav_host_fragment, fragment3, "3").hide(fragment3).commit();
-        fm.beginTransaction().add(R.id.nav_host_fragment, fragment2, "2").hide(fragment2).commit();
-        fm.beginTransaction().add(R.id.nav_host_fragment,fragment1, "1").commit();
+        //fm.beginTransaction().add(R.id.nav_host_fragment, fragment4, "4").hide(fragment4).commit();
+        //fm.beginTransaction().add(R.id.nav_host_fragment, fragment3, "3").hide(fragment3).commit();
+        //fm.beginTransaction().add(R.id.nav_host_fragment, fragment2, "2").hide(fragment2).commit();
+        //fm.beginTransaction().add(R.id.nav_host_fragment,fragment1, "1").commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,new HomeFragment()).commit();
     }
 
     @Override
@@ -54,20 +55,24 @@ public class SecondActivity extends BaseActivity implements EventListener, Botto
 
         switch (menuItem.getItemId()) {
             case R.id.navigation_home:
-                fm.beginTransaction().hide(active).show(fragment1).commit();
-                active = fragment1;
+                // fm.beginTransaction().hide(active).show(fragment1).commit();
+                //  active = fragment1;
+                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,new HomeFragment()).commit();
                 return true;
             case R.id.navigation_dashboard:
-                fm.beginTransaction().hide(active).show(fragment2).commit();
-                active = fragment2;
+                //  fm.beginTransaction().hide(active).show(fragment2).commit();
+                //  active = fragment2;
+                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,new DashboardFragment()).commit();
                 return true;
             case R.id.navigation_notifications:
-                fm.beginTransaction().hide(active).show(fragment3).commit();
-                active = fragment3;
+                // fm.beginTransaction().hide(active).show(fragment3).commit();
+                // active = fragment3;
+                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,new NotificationsFragment()).commit();
                 return true;
             case R.id.navigation_profile:
-                fm.beginTransaction().hide(active).show(fragment4).commit();
-                active = fragment4;
+                // fm.beginTransaction().hide(active).show(fragment4).commit();
+                // active = fragment4;
+                getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,new profile()).commit();
                 return true;
 
 
@@ -77,6 +82,7 @@ public class SecondActivity extends BaseActivity implements EventListener, Botto
 
         return false;
     }
+
 
 
 }

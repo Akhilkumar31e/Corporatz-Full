@@ -1,15 +1,12 @@
 package com.maniraghu.flashchatnewfirebase.ui.dashboard;
 
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
-
-
 import androidx.lifecycle.ViewModelProviders;
 
 import com.maniraghu.flashchatnewfirebase.BaseFragment;
@@ -20,7 +17,7 @@ import com.maniraghu.flashchatnewfirebase.ui.dashboard.FeelingLonely.FeelingLone
 import com.maniraghu.flashchatnewfirebase.ui.dashboard.JobSecurity.JobSecurity;
 import com.maniraghu.flashchatnewfirebase.ui.dashboard.PartnerWithUs.Partner;
 import com.maniraghu.flashchatnewfirebase.ui.dashboard.Rating.RateFragment;
-import com.maniraghu.flashchatnewfirebase.ui.dashboard.SmilePlease.Smile;
+import com.maniraghu.flashchatnewfirebase.ui.dashboard.SmilePlease.SmilePleaseViewer;
 import com.maniraghu.flashchatnewfirebase.ui.dashboard.WellBeingCorner.WellBeing;
 import com.maniraghu.flashchatnewfirebase.ui.dashboard.WomensCorner.WomenCorner;
 
@@ -116,7 +113,7 @@ public class DashboardFragment extends BaseFragment {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity(),"Yes", Toast.LENGTH_LONG).show();
-                if (mActivity != null) mActivity.navigateToFragment(new Smile(), null);
+                if (mActivity != null) mActivity.navigateToFragment(new SmilePleaseViewer(), null);
 
 
             }
