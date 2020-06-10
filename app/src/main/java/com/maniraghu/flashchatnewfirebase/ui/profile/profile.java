@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,7 +20,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.maniraghu.flashchatnewfirebase.BaseFragment;
 import com.maniraghu.flashchatnewfirebase.R;
+import com.maniraghu.flashchatnewfirebase.ui.profile.AboutUsFragment.AboutUsFragment;
+import com.maniraghu.flashchatnewfirebase.ui.profile.ContactUsFragment.ContactUsFragment;
+import com.maniraghu.flashchatnewfirebase.ui.profile.FAQFragment.FAQFragment;
+import com.maniraghu.flashchatnewfirebase.ui.profile.SubscriptionPlans.SubscriptionPlans;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,7 +34,7 @@ import java.util.List;
 import static android.app.Activity.RESULT_OK;
 
 
-public class profile extends Fragment {
+public class profile extends BaseFragment {
 
     private ProfileViewModel mViewModel;
     private FirebaseAuth mAuth;
@@ -39,7 +43,7 @@ public class profile extends Fragment {
     public DatabaseReference myRef;
     private String userId;
     public String userName;
-    Button l;
+    Button logout,faq,contact,about,subscription;
     private ExpandableListView listView;
     private ExpandableList listAdapter;
     private List<String> listDataHeader;
@@ -79,19 +83,44 @@ public class profile extends Fragment {
 
             }
         });
+        faq=getActivity().findViewById(R.id.FAQs_button);
+        faq.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mActivity != null) mActivity.navigateToFragment(new FAQFragment(), null);
+            }
+        });
+        contact=getActivity().findViewById(R.id.ContactUs_butotn);
+        contact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mActivity != null) mActivity.navigateToFragment(new ContactUsFragment(), null);
+            }
+        });
+        about=getActivity().findViewById(R.id.AboutUs_button);
+        about.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mActivity != null) mActivity.navigateToFragment(new AboutUsFragment(), null);
+            }
+        });
+        subscription=getActivity().findViewById(R.id.subscription_plans_button);
+        subscription.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mActivity != null) mActivity.navigateToFragment(new SubscriptionPlans(), null);
+            }
+        });
 
-
-        l = getActivity().findViewById(R.id.button);
+        logout = getActivity().findViewById(R.id.logout_button);
         tvUser=getActivity().findViewById(R.id.username);
         comReg=getActivity().findViewById(R.id.company);
-        l.setOnClickListener(new View.OnClickListener() {
+        logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 out();
             }
         });
-
-
         listView= (ExpandableListView)getActivity().findViewById(R.id.expand);
         initData();
         listAdapter = new ExpandableList(getContext(),listDataHeader,listHash);

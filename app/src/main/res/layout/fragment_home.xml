@@ -13,7 +13,7 @@
        android:id="@+id/welcome_msg"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-      android:text="Welcome."
+      android:text="@string/Corporatz_heading"
        android:textSize="30dp"
       android:textAlignment="center"
        android:textColor="@color/black"/>

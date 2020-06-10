@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:gravity="top"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
@@ -87,7 +92,7 @@
             android:id="@+id/register_dob"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Date Of Birth"
+            android:hint="Date Of Birth (DD/MM/YYYY)"
             android:imeOptions="actionNext"
             android:inputType="textNoSuggestions"
             android:maxLines="1"
@@ -241,3 +246,4 @@
 
 
 </LinearLayout>
+</ScrollView>

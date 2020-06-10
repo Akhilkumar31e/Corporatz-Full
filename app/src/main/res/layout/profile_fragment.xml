@@ -177,6 +177,7 @@
 
             <Button
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:id="@+id/subscription_plans_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/blue"
@@ -187,6 +188,7 @@
                 android:theme="@style/FlatButton" />
             <Button
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:id="@+id/FAQs_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
 
@@ -196,6 +198,7 @@
                 android:theme="@style/FlatButton" />
             <Button
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:id="@+id/ContactUs_butotn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/blue"
@@ -205,7 +208,17 @@
                 android:textAlignment="viewStart"
                 android:theme="@style/FlatButton" />
             <Button
-                android:id="@+id/button"
+                style="@style/Widget.AppCompat.Button.Borderless.Colored"
+                android:id="@+id/AboutUs_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                android:padding="8dp"
+                android:text="About Us >"
+                android:textAlignment="viewStart"
+                android:theme="@style/FlatButton" />
+            <Button
+                android:id="@+id/logout_button"
                 style="@style/Widget.AppCompat.Button.Borderless.Colored"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -215,15 +228,7 @@
                 android:text="Logout"
                 android:textAlignment="viewStart"
                 android:theme="@style/FlatButton" />
-            <Button
-                style="@style/Widget.AppCompat.Button.Borderless.Colored"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
 
-                android:padding="8dp"
-                android:text="About Us >"
-                android:textAlignment="viewStart"
-                android:theme="@style/FlatButton" />
 
         </LinearLayout>
     </ScrollView>

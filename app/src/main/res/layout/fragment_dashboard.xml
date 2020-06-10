@@ -39,9 +39,11 @@
                         android:src="@drawable/ic_people_black_24dp" />
 
                     <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="60dp"
-                        android:text="Rate your employee" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:text="@string/RateYourEmployerTitle" />
 
                 </LinearLayout>
 
@@ -68,9 +70,11 @@
                         android:src="@drawable/ic_directions_car_black_24dp" />
 
                     <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="60dp"
-                        android:text="Pool your car" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textAlignment="center"
+                        android:text="@string/PoolCarTitle" />
 
                 </LinearLayout>
 
@@ -97,9 +101,11 @@
                         android:src="@drawable/ic_sentiment_very_satisfied_black_24dp" />
 
                     <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="60dp"
-                        android:text="Employee well being corner" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textAlignment="center"
+                        android:text="@string/employee_well_being_corner_title" />
 
                 </LinearLayout>
 
@@ -135,9 +141,11 @@
                         android:src="@drawable/ic_woman" />
 
                     <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="60dp"
-                        android:text="Working women's corner" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textAlignment="center"
+                        android:text="@string/working_women_s_corner_title" />
 
                 </LinearLayout>
 
@@ -164,9 +172,11 @@
                         android:src="@drawable/ic_insert_drive_file_black_24dp" />
 
                     <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="60dp"
-                        android:text="Corporate forum" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textAlignment="center"
+                        android:text="@string/corporate_forum_title" />
 
                 </LinearLayout>
 
@@ -193,9 +203,11 @@
                         android:src="@drawable/ic_sentiment_satisfied_black_24dp" />
 
                     <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="60dp"
-                        android:text="Smile please" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textAlignment="center"
+                        android:text="@string/smile_please_title" />
 
                 </LinearLayout>
 
@@ -231,9 +243,11 @@
                         android:src="@drawable/ic_sentiment_dissatisfied_black_24dp" />
 
                     <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="60dp"
-                        android:text="Feeling lonely" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textAlignment="center"
+                        android:text="@string/feeling_lonely_title" />
 
                 </LinearLayout>
 
@@ -260,9 +274,11 @@
                         android:src="@drawable/ic_vpn_lock_black_24dp" />
 
                     <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="60dp"
-                        android:text="Job security" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textAlignment="center"
+                        android:text="@string/job_security_title" />
 
                 </LinearLayout>
 
@@ -283,15 +299,17 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:layout_width="100dp"
+                        android:layout_width="match_parent"
                         android:layout_height="100dp"
                         android:background="@drawable/backcolor"
                         android:src="@drawable/ic_thumbs_up_down_black_24dp" />
 
                     <TextView
-                        android:layout_width="80dp"
-                        android:layout_height="60dp"
-                        android:text="Partner with us" />
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:textAlignment="center"
+                        android:text="@string/partner_with_us_title" />
 
                 </LinearLayout>
 
