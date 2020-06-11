@@ -28,7 +28,7 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
     private DatabaseReference mDatabase;
     private FirebaseAuth mAuth;
     private boolean mProcessLike=false;
-    private long likes=100;
+    private boolean mProcessDisike=false;
     public SmilePleaseRecyclerView(Context mContext, List<Upload> mPost) {
         this.mContext = mContext;
         this.mPost = mPost;
@@ -45,17 +45,24 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
     public void onBindViewHolder(@NonNull final SmilePleaseViewHolder holder, int position) {
         final Upload uploads=mPost.get(position);
         final String post_key=uploads.getmPostId();
-        mDatabase= FirebaseDatabase.getInstance().getReference().child("Likes");
+        mDatabase= FirebaseDatabase.getInstance().getReference().child("Reactions");
+
         mAuth=FirebaseAuth.getInstance();
+
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                holder.noOfLikes.setText(String.valueOf(dataSnapshot.child(post_key).getChildrenCount())+" likes");
+                holder.noOfLikes.setText(dataSnapshot.child("Likes").child(post_key).getChildrenCount() +" likes");
+                holder.noOfDislikes.setText(dataSnapshot.child("Dislikes").child(post_key).getChildrenCount() +" dislikes");
                // likes=dataSnapshot.child(post_key).getChildrenCount();
-                if(dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
+                if(dataSnapshot.child("Likes").child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
                     holder.like.setImageResource(R.drawable.ic_thumb_up_blue_24dp);
                 }
                 else holder.like.setImageResource(R.drawable.ic_thumb_up_black_24dp);
+                if(dataSnapshot.child("Dislikes").child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
+                    holder.dislike.setImageResource(R.drawable.ic_thumb_down_blue_24dp);
+                }
+                else holder.dislike.setImageResource(R.drawable.ic_thumb_down_black_24dp);
             }
 
             @Override
@@ -63,8 +70,6 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
 
             }
         });
-
-
         holder.username.setText(uploads.getmUsername());
         holder.time.setText(uploads.getmTime());
         holder.desc.setText(uploads.getmDesc());
@@ -75,6 +80,7 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
                 .fit()
                 .centerCrop()
                 .into(holder.imgView);
+
         holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,12 +89,16 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (mProcessLike) {
-                                if (dataSnapshot.child(post_key).hasChild(mAuth.getCurrentUser().getUid())) {
-                                    mDatabase.child(post_key).child(mAuth.getCurrentUser().getUid()).removeValue();
+                                if (dataSnapshot.child("Likes").child(post_key).hasChild(mAuth.getCurrentUser().getUid())) {
+                                    mDatabase.child("Likes").child(post_key).child(mAuth.getCurrentUser().getUid()).removeValue();
                                     holder.like.setImageResource(R.drawable.ic_thumb_up_black_24dp);
                                     mProcessLike=false;
                                 } else {
-                                    mDatabase.child(post_key).child(mAuth.getCurrentUser().getUid()).setValue("Random");
+                                    if(dataSnapshot.child("Dislikes").child(post_key).hasChild(mAuth.getCurrentUser().getUid())) {
+                                        mDatabase.child("Dislikes").child(post_key).child(mAuth.getCurrentUser().getUid()).removeValue();
+                                        holder.dislike.setImageResource(R.drawable.ic_thumb_down_black_24dp);
+                                    }
+                                    mDatabase.child("Likes").child(post_key).child(mAuth.getCurrentUser().getUid()).setValue("Like");
                                     holder.like.setImageResource(R.drawable.ic_thumb_up_blue_24dp);
                                     mProcessLike = false;
                                 }
@@ -100,6 +110,38 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
                         }
                     });
 
+            }
+        });
+        holder.dislike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mProcessDisike=true;
+                mDatabase.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if(mProcessDisike){
+                            if(dataSnapshot.child("Dislikes").child(post_key).hasChild(mAuth.getCurrentUser().getUid())){
+                                mDatabase.child("Dislikes").child(post_key).child(mAuth.getCurrentUser().getUid()).removeValue();
+                                holder.dislike.setImageResource(R.drawable.ic_thumb_down_black_24dp);
+                                mProcessDisike=false;
+                            }
+                            else{
+                                if (dataSnapshot.child("Likes").child(post_key).hasChild(mAuth.getCurrentUser().getUid())) {
+                                    mDatabase.child("Likes").child(post_key).child(mAuth.getCurrentUser().getUid()).removeValue();
+                                    holder.like.setImageResource(R.drawable.ic_thumb_up_black_24dp);
+                                }
+                                mDatabase.child("Dislikes").child(post_key).child(mAuth.getCurrentUser().getUid()).setValue("Dislike");
+                                holder.dislike.setImageResource(R.drawable.ic_thumb_down_blue_24dp);
+                                mProcessDisike=false;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
             }
         });
     }
@@ -117,7 +159,9 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
         public ImageView imgView;
         public TextView time;
         public TextView noOfLikes;
+        public TextView noOfDislikes;
         public ImageButton like;
+        public ImageButton dislike;
         public SmilePleaseViewHolder(View itemView) {
             super(itemView);
             mView=itemView;
@@ -126,7 +170,9 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
             imgView = itemView.findViewById(R.id.smile_image);
             time=itemView.findViewById(R.id.smile_post_time);
             like=itemView.findViewById(R.id.smile_like_button);
+            dislike=itemView.findViewById(R.id.smile_dislike_button);
             noOfLikes=itemView.findViewById(R.id.smile_likes);
+            noOfDislikes=itemView.findViewById(R.id.smile_dislikes);
         }
     }
 }

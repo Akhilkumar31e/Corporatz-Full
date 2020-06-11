@@ -8,6 +8,16 @@ public class Upload {
     private String mTime;
     private String mPostId;
     private String mLike;
+    private String mDislike;
+
+    public String getmDislike() {
+        return mDislike;
+    }
+
+    public void setmDislike(String mDislike) {
+        this.mDislike = mDislike;
+    }
+
     public Upload() {
         //empty constructor needed
     }

@@ -35,7 +35,7 @@ public class SmilePleaseViewer extends BaseFragment {
     private SmilePleaseViewerViewModel mViewModel;
     private Button post;
     private RecyclerView recyclerView;
-    private DatabaseReference mDatabase,mLikeDatabase;
+    private DatabaseReference mDatabase,mReactionDatabase;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private List<Upload> mPost;
@@ -71,8 +71,9 @@ public class SmilePleaseViewer extends BaseFragment {
         mProgressCircle=getActivity().findViewById(R.id.smile_progress_circle);
         recyclerView.setLayoutManager(new LinearLayoutManager((getContext())));
         recyclerView.setHasFixedSize(true);
+
         mDatabase = FirebaseDatabase.getInstance().getReference("uploads");
-        mLikeDatabase = FirebaseDatabase.getInstance().getReference("Likes");
+        mReactionDatabase = FirebaseDatabase.getInstance().getReference("Reactions");
         mAuth=FirebaseAuth.getInstance();
         mPost=new ArrayList<>();
         hashSet=new HashSet<>();
@@ -85,10 +86,11 @@ public class SmilePleaseViewer extends BaseFragment {
                     final Upload upload=snapshot.getValue(Upload.class);
                     //if(!upload.getmId().equals(user.getUid().toString()))
                     post_key=upload.getmPostId();
-                    mLikeDatabase.addValueEventListener(new ValueEventListener() {
+                    mReactionDatabase.addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            upload.setmLike(String.valueOf(dataSnapshot.child(post_key).getChildrenCount()));
+                            upload.setmLike(String.valueOf(dataSnapshot.child("Likes").child(post_key).getChildrenCount()));
+                            upload.setmDislike(String.valueOf(dataSnapshot.child("Dislikes").child(post_key).getChildrenCount()));
                             Log.d("like",upload.getmLike());
 
                         }
@@ -98,6 +100,7 @@ public class SmilePleaseViewer extends BaseFragment {
 
                         }
                     });
+
                     if(!hashSet.contains(upload)) {
                         mPost.add(upload);
                         hashSet.add(upload);
