@@ -27,8 +27,6 @@ import java.util.List;
 
 public class RateFragment extends BaseFragment {
 
-
-
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view=inflater.inflate(R.layout.rate_fragment, container, false);

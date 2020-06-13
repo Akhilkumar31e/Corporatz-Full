@@ -16,24 +16,27 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.maniraghu.flashchatnewfirebase.BaseFragment;
 import com.maniraghu.flashchatnewfirebase.R;
 
 
-public class RatingFragment extends Fragment implements View.OnClickListener {
+public class RatingFragment extends BaseFragment implements View.OnClickListener {
 
     private RatingViewModel mViewModel;
     String nameOfEmployee;
     DatabaseReference databaseReference;
     FirebaseAuth mAuth;
     FirebaseUser mUser;
-    Button submit;
+    Button submit,viewRatings;
     public static RatingFragment newInstance() {
         return new RatingFragment();
     }
@@ -53,6 +56,7 @@ public class RatingFragment extends Fragment implements View.OnClickListener {
         mAuth=FirebaseAuth.getInstance();
         mUser=mAuth.getCurrentUser();
         submit=getActivity().findViewById(R.id.submit_rating);
+        viewRatings=getActivity().findViewById(R.id.view_ratings);
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -120,6 +124,13 @@ public class RatingFragment extends Fragment implements View.OnClickListener {
         b3.setOnClickListener(this);
         b4.setOnClickListener(this);
         b5.setOnClickListener(this);
+
+        viewRatings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mActivity != null) mActivity.navigateToFragment(new AllRatingsFragment(), null);
+            }
+        });
 
     }
 
@@ -242,20 +253,41 @@ public class RatingFragment extends Fragment implements View.OnClickListener {
         RatingBar rating=(RatingBar)getActivity().findViewById(R.id.ratingBar);
         //add rating to database
         final TextView comName=(TextView) getActivity().findViewById(R.id.tvCom);
+        final TextView comRating=(TextView)getActivity().findViewById(R.id.finalView);
         final EditText name=(EditText)getActivity().findViewById(R.id.companyName);
-        String companyName=name.getText().toString();
-        comName.setText(companyName);
-        Log.d("companyName",companyName);
+        final String companyName=name.getText().toString();
+
 
         //add companyName to database
-        Float ratingVal=rating.getRating();
-        Log.d("rating",ratingVal+"");
-        TextView comRating=(TextView)getActivity().findViewById(R.id.finalView);
-        comRating.setText(ratingVal+"");
+        final Float ratingVal=rating.getRating();
 
-        String uploadId=databaseReference.push().getKey();
-        Rating r=new Rating(companyName,ratingVal.toString(),mUser.getUid().toString());
-        databaseReference.child(uploadId).setValue(r);
-        Toast.makeText(getActivity(),"Successfully posted your rating",Toast.LENGTH_LONG).show();
+
+
+        final Rating r=new Rating(companyName,ratingVal.toString(),mUser.getUid(),"");
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChild(mUser.getUid())){
+                    Rating currRating=dataSnapshot.child(mUser.getUid()).getValue(Rating.class);
+                    comName.setText(currRating.getCompanyName());
+                    comRating.setText(currRating.getCompanyRating());
+                    Toast.makeText(getActivity(),"You have already submitted your response",Toast.LENGTH_LONG).show();
+                }
+                else{
+                    comName.setText(companyName);
+                    Log.d("companyName",companyName);
+                    Log.d("rating",ratingVal+"");
+
+                    comRating.setText(ratingVal+"");
+                    databaseReference.child(mUser.getUid()).setValue(r);
+                    Toast.makeText(getActivity(),"Successfully posted your rating",Toast.LENGTH_LONG).show();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

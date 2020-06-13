@@ -14,15 +14,9 @@
         android:layout_margin="20sp"
         android:text="-Write a Review about your employee"
         android:textColor="@color/black" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20sp"
-        android:text="-Write a Review about your employee"
-        android:textColor="@color/black" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/review_text"
         android:layout_margin="10sp"
         android:layout_width="match_parent"
         android:layout_height="150dp"
@@ -33,10 +27,11 @@
         <requestFocus />
     </EditText>
     <Button
-        android:layout_width="wrap_content"
+        android:id="@+id/review_submit_button"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="200dp"
         android:text="Submit Feedback"
+        android:background="@color/blue"
         android:textColor="@color/white"
         />
 
