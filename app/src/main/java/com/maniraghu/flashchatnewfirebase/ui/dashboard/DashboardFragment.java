@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProviders;
@@ -32,10 +31,7 @@ public class DashboardFragment extends BaseFragment {
     }
     @Override
     public void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
@@ -44,9 +40,6 @@ public class DashboardFragment extends BaseFragment {
         dashboardViewModel =
                 ViewModelProviders.of(this).get(DashboardViewModel.class);
         View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
-
-
-
         return root;
     }
 
@@ -59,10 +52,7 @@ public class DashboardFragment extends BaseFragment {
         cvrate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"Yes", Toast.LENGTH_LONG).show();
                 if (mActivity != null) mActivity.navigateToFragment(new RateFragment(), null);
-
-//
             }
         });
         cvpool=(CardView) view.findViewById(R.id.pooling);
@@ -83,55 +73,41 @@ public class DashboardFragment extends BaseFragment {
         cvlone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"Yes", Toast.LENGTH_LONG).show();
                 if (mActivity != null) mActivity.navigateToFragment(new FeelingLonely(), null);
-
-
             }
         });
         cvforum=(CardView) view.findViewById(R.id.corporate);
         cvforum.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"Yes", Toast.LENGTH_LONG).show();
                 if (mActivity != null) mActivity.navigateToFragment(new CorpForum(), null);
-
-
             }
         });
         cvwomen=(CardView) view.findViewById(R.id.woman);
         cvwomen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"Yes", Toast.LENGTH_LONG).show();
                 if (mActivity != null) mActivity.navigateToFragment(new WomenCorner(), null);
-
             }
         });
         cvsmile=(CardView) view.findViewById(R.id.smile);
         cvsmile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"Yes", Toast.LENGTH_LONG).show();
                 if (mActivity != null) mActivity.navigateToFragment(new SmilePleaseViewer(), null);
-
-
             }
         });
         cvsecurity=(CardView) view.findViewById(R.id.security);
         cvsecurity.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"Yes", Toast.LENGTH_LONG).show();
                 if (mActivity != null) mActivity.navigateToFragment(new JobSecurity(), null);
-
             }
         });
         cvpartner=(CardView) view.findViewById(R.id.partner);
         cvpartner.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity(),"Yes", Toast.LENGTH_LONG).show();
                 if (mActivity != null) mActivity.navigateToFragment(new Partner(), null);
 
             }

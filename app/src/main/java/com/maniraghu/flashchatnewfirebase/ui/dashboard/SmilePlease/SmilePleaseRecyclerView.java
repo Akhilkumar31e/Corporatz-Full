@@ -73,7 +73,10 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
         holder.username.setText(uploads.getmUsername());
         holder.time.setText(uploads.getmTime());
         holder.desc.setText(uploads.getmDesc());
-
+        String taggedUser=uploads.getmTaggedUserId();
+        if(taggedUser!=null&&taggedUser!=""){
+            holder.userTag.setText("Tagged users : @"+taggedUser);
+        }
         Picasso.with(mContext)
                 .load(uploads.getmImageUrl())
                 .placeholder(R.drawable.grad)
@@ -136,7 +139,6 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
                             }
                         }
                     }
-
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -162,6 +164,7 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
         public TextView noOfDislikes;
         public ImageButton like;
         public ImageButton dislike;
+        public TextView userTag;
         public SmilePleaseViewHolder(View itemView) {
             super(itemView);
             mView=itemView;
@@ -173,6 +176,7 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
             dislike=itemView.findViewById(R.id.smile_dislike_button);
             noOfLikes=itemView.findViewById(R.id.smile_likes);
             noOfDislikes=itemView.findViewById(R.id.smile_dislikes);
+            userTag= itemView.findViewById(R.id.smile_tagged_username);
         }
     }
 }

@@ -142,13 +142,13 @@ public class profile extends BaseFragment {
         listDataHeader.add("Certifications");
 
         List<String>  skills = new ArrayList<>();
-        skills.add("C++");
-        skills.add("Java");
-        skills.add("Python");
-        skills.add("Web Tech");
+        //skills.add("C++");
+        //skills.add("Java");
+        //skills.add("Python");
+        //skills.add("Web Tech");
 
         List<String> certificates =new ArrayList<>();
-        certificates.add("Nptel python");
+        //certificates.add("Nptel python");
 
         listHash.put(listDataHeader.get(0),skills);
         listHash.put(listDataHeader.get(1),certificates);

@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -36,6 +37,8 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.login_email);
         mPasswordView = (EditText) findViewById(R.id.login_password);
@@ -54,6 +57,12 @@ public class LoginActivity extends AppCompatActivity {
         // TODO: Grab an instance of FirebaseAuth
         FirebaseApp.initializeApp(this);
         mAuth=FirebaseAuth.getInstance();
+        FirebaseUser user=mAuth.getCurrentUser();
+        if(user!=null){
+            Intent intent=new Intent(LoginActivity.this,SecondActivity.class);
+
+            startActivityForResult(intent,Request_code);
+        }
     }
 
     // Executed when Sign in button pressed

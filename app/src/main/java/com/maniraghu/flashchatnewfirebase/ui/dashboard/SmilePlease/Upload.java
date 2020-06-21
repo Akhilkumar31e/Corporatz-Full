@@ -9,6 +9,15 @@ public class Upload {
     private String mPostId;
     private String mLike;
     private String mDislike;
+    private String mTaggedUserId;
+
+    public String getmTaggedUserId() {
+        return mTaggedUserId;
+    }
+
+    public void setmTaggedUserId(String mTaggedUserId) {
+        this.mTaggedUserId = mTaggedUserId;
+    }
 
     public String getmDislike() {
         return mDislike;
@@ -22,13 +31,14 @@ public class Upload {
         //empty constructor needed
     }
 
-    public Upload(String mDesc, String mImageUrl, String mUsername, String mId, String mTime,String mPostId) {
+    public Upload(String mDesc, String mImageUrl, String mUsername, String mId, String mTime, String mPostId, String mTaggedUserId) {
         this.mDesc = mDesc;
         this.mImageUrl = mImageUrl;
         this.mUsername = mUsername;
         this.mId = mId;
         this.mTime = mTime;
-        this.mPostId=mPostId;
+        this.mPostId = mPostId;
+        this.mTaggedUserId = mTaggedUserId;
     }
 
     public String getmLike() {

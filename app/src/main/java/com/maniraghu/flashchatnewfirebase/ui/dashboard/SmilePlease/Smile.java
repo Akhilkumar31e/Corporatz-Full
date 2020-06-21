@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.MimeTypeMap;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -35,9 +37,11 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.maniraghu.flashchatnewfirebase.BaseFragment;
 import com.maniraghu.flashchatnewfirebase.R;
+import com.maniraghu.flashchatnewfirebase.ui.profile.UserInformation;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class Smile extends BaseFragment {
@@ -50,6 +54,7 @@ public class Smile extends BaseFragment {
     private EditText mEditTextFileName;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
+    private AutoCompleteTextView mtagUser;
 
     private Uri mImageUri;
     private SmileViewModel mViewModel;
@@ -58,9 +63,10 @@ public class Smile extends BaseFragment {
     private FirebaseUser user;
     private String uId,username,time;
     private StorageReference mStorageRef;
-    private DatabaseReference mDatabaseRef,mUserDatabase;
+    private DatabaseReference mDatabaseRef,mUserDatabase,mTaggedUsersDatabase;
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
+    private ArrayList<String> taggedUsers;
     public static Smile newInstance() {
         return new Smile();
     }
@@ -82,6 +88,25 @@ public class Smile extends BaseFragment {
         mEditTextFileName = getActivity().findViewById(R.id.edit_text_file_name);
         mImageView = getActivity().findViewById(R.id.image_view);
         mProgressBar = getActivity().findViewById(R.id.progress_bar);
+        mtagUser = getActivity().findViewById(R.id.smile_please_tag_user);
+        taggedUsers=new ArrayList<>();
+
+        mTaggedUsersDatabase=FirebaseDatabase.getInstance().getReference("Users");
+        mTaggedUsersDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot user:dataSnapshot.getChildren()) {
+                    UserInformation uInfo = user.getValue(UserInformation.class);
+                    if (uInfo.getUsername() != null) taggedUsers.add(uInfo.getUsername());
+                }
+                ArrayAdapter<String> actvAdapter=new ArrayAdapter<>(getActivity(),android.R.layout.simple_list_item_1,taggedUsers);
+                mtagUser.setAdapter(actvAdapter);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
@@ -172,7 +197,7 @@ public class Smile extends BaseFragment {
                                    Toast.makeText(getActivity().getApplicationContext(), "Upload successful", Toast.LENGTH_LONG).show();
                                    String uploadId = mDatabaseRef.push().getKey();
                                    Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
-                                           uri.toString(),username,uId,time,uploadId);
+                                           uri.toString(),username,uId,time,uploadId,mtagUser.getText().toString());
 
                                    mDatabaseRef.child(uploadId).setValue(upload);
                                    if(mActivity!=null) mActivity.navigateToFragment(new SmilePleaseViewer(),null);

@@ -25,12 +25,23 @@
             android:layout_toEndOf="@+id/button_choose_image"
             android:hint="Enter description about the post" />
 
+        <AutoCompleteTextView
+            android:id="@+id/smile_please_tag_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edit_text_file_name"
+            android:completionThreshold="1"
+            android:hint="Tag a user"
+            android:textStyle="bold"
+            android:completionHint="Tag a user"
+            />
+
         <ImageView
             android:id="@+id/image_view"
             android:layout_width="380dp"
             android:layout_height="233dp"
             android:layout_above="@id/progress_bar"
-            android:layout_below="@id/edit_text_file_name"
+            android:layout_below="@id/smile_please_tag_user"
             android:layout_alignParentEnd="true"
             android:layout_marginTop="39dp"
             android:layout_marginEnd="0dp"
