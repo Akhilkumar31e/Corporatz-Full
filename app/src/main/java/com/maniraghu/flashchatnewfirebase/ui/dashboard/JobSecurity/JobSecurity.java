@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -34,6 +35,7 @@ public class JobSecurity extends BaseFragment {
     private List<JobInfo> mJobs;
     private ProgressBar progressCircle;
     private TextView noJob;
+    private Button postJobButton;
     public static JobSecurity newInstance() {
         return new JobSecurity();
     }
@@ -54,6 +56,13 @@ public class JobSecurity extends BaseFragment {
         recyclerView.setHasFixedSize(true);
         databaseReference = FirebaseDatabase.getInstance().getReference("jobInfo");
         noJob=getActivity().findViewById(R.id.no_jobs_msg);
+        postJobButton=getActivity().findViewById(R.id.post_job);
+        postJobButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mActivity != null) mActivity.navigateToFragment(new PostJobFragment(), null);
+            }
+        });
         mJobs=new ArrayList<>();
         progressCircle=getActivity().findViewById(R.id.job_progress_circle);
         databaseReference.addValueEventListener(new ValueEventListener() {

@@ -36,8 +36,8 @@ public class RideRequest extends RecyclerView.Adapter<RideRequest.RideRequestVie
     public void onBindViewHolder(@NonNull RideRequestViewHolder holder, int position) {
             final RideInformation current=mRideInfo.get(position);
 
-            holder.destination.setText("To : "+current.getDestination());
-            holder.source.setText("Starting at: "+current.getSource());
+            holder.destination.setText(current.getDestination());
+            holder.source.setText(current.getSource());
             holder.riderName.setText(current.getNameOfPooler());
             holder.gender.setText(current.getGender());
             holder.price.setText("Price : "+current.getCost()+"/-");

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    android:gravity="top"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        tools:context="com.maniraghu.flashchatnewfirebase.RegisterActivity">
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/black">
+            <AutoCompleteTextView
+                android:id="@+id/post_job_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Job name"
+                android:imeOptions="actionNext"
+                android:inputType="textNoSuggestions"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textIsSelectable="false"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/black">
+            <AutoCompleteTextView
+                android:id="@+id/post_company_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter Company Name"
+                android:imeOptions="actionNext"
+                android:inputType="textNoSuggestions"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textIsSelectable="false"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/black">
+            <AutoCompleteTextView
+                android:id="@+id/post_salary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mention Salary(LPA)"
+                android:imeOptions="actionNext"
+                android:inputType="textNoSuggestions"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textIsSelectable="false"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/black">
+            <AutoCompleteTextView
+                android:id="@+id/post_job_contact"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Enter contact"
+                android:imeOptions="actionNext"
+                android:inputType="textNoSuggestions"
+                android:maxLines="1"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textIsSelectable="false"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <Button
+            android:id="@+id/post_job_button"
+            style="?android:textAppearanceMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/white"
+            android:onClick="signUp"
+            android:text="Post"
+            android:textColor="@color/green"
+            android:textStyle="bold" />
+    </LinearLayout>
+</ScrollView>

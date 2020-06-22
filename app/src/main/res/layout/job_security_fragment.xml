@@ -14,9 +14,17 @@
         android:textColor="@color/black"
         android:layout_centerHorizontal="true"
         android:textSize="30dp"
-
         android:text="Find Jobs here."
-        android:id="@+id/doctor"/>
+        android:id="@+id/job_heading"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:layout_below="@id/job_heading"
+        android:text=""
+        android:id="@+id/no_jobs_msg"/>
 
     <ProgressBar
         android:id="@+id/job_progress_circle"
@@ -28,19 +36,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/job_recyclerview"
-
-        android:layout_below="@+id/doctor">
+        android:layout_below="@+id/no_jobs_msg"
+        >
 
     </androidx.recyclerview.widget.RecyclerView>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/black"
 
-        android:textSize="30dp"
-        android:layout_below="@id/job_recyclerview"
-
-        android:id="@+id/no_jobs_msg"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom">
+        <Button
+            android:id="@+id/post_job"
+            style="?android:textAppearanceMedium"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@color/white"
+            android:text="Post a Job"
+            android:textColor="@color/green"
+            android:textStyle="bold" />
+    </RelativeLayout>
 
 </RelativeLayout>

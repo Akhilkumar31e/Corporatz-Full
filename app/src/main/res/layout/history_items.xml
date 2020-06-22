@@ -64,10 +64,5 @@
                 android:textSize="20dp"
                 android:layout_marginLeft="70dp"/>
         </LinearLayout>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp">
-
-        </RelativeLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

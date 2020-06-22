@@ -71,59 +71,80 @@
                 android:textSize="10dp" />
             </LinearLayout>
         </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/request_source_item"
-            android:text="Source"
-            android:textStyle="bold"
-            android:textColor="@color/cyan"
-            android:textSize="20dp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/request_destination_item"
-            android:text="Destination"
-            android:textStyle="bold"
-            android:textColor="@color/cyan"
-            android:textSize="20dp"/>
-        <Button
-            android:id="@+id/call_rider"
-            style="?android:textAppearanceMedium"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_centerHorizontal="true"
-            android:background="@color/blue"
-
-            android:text="Call"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="30dp">
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp">
             <TextView
-
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="Starting Point : "
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/request_source_item"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ending Point : "
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:id="@+id/request_destination_item"
+                android:text=""
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:textSize="20dp"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="price"
                 android:id="@+id/ride_price"
-                android:textStyle="bold"/>
-
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
             <TextView
-                android:layout_marginLeft="40dp"
                 android:id="@+id/ride_time"
+                android:layout_weight="1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="0dp"
                 android:text="Time"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="@color/black"/>
         </LinearLayout>
-        <RelativeLayout
+        <Button
+            android:id="@+id/call_rider"
+            style="?android:textAppearanceMedium"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/white"/>
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_centerHorizontal="true"
+            android:background="@color/blue"
+            android:text="Call"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>

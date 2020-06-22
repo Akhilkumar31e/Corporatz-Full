@@ -84,6 +84,14 @@ public class RegisterActivity extends AppCompatActivity {
         attemptRegistration();
     }
 
+    //Executed when Already Registered button is pressed
+    public void alreadyRegistered(View v) {
+        Intent intent=new Intent(RegisterActivity.this,LoginActivity.class);
+        finish();
+        startActivity(intent);
+
+    }
+
     private void attemptRegistration() {
 
         // Reset errors displayed in the form.

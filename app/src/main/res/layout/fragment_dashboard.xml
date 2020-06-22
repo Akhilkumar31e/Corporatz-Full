@@ -247,7 +247,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
                         android:textAlignment="center"
-                        android:text="@string/feeling_lonely_title" />
+                        android:text="@string/feeling_lonely_alt_title" />
 
                 </LinearLayout>
 

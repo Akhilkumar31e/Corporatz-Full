@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -28,6 +29,7 @@ import com.maniraghu.flashchatnewfirebase.ui.profile.FAQFragment.FAQFragment;
 import com.maniraghu.flashchatnewfirebase.ui.profile.SubscriptionPlans.SubscriptionPlans;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,7 +42,7 @@ public class profile extends BaseFragment {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseDatabase mFirebaseDatabase;
-    public DatabaseReference myRef;
+    public DatabaseReference myRef,skillsDatabase,certiDatabase;
     private String userId;
     public String userName;
     Button logout,faq,contact,about,subscription;
@@ -50,6 +52,7 @@ public class profile extends BaseFragment {
     private HashMap<String,List<String>> listHash;
     public TextView tvUser;
     private  TextView comReg;
+    private LinearLayout editProfile;
     public  FirebaseUser user;
     public static profile newInstance() {
         return new profile();
@@ -69,8 +72,18 @@ public class profile extends BaseFragment {
         mAuth=FirebaseAuth.getInstance();
         mFirebaseDatabase=FirebaseDatabase.getInstance();
         myRef=mFirebaseDatabase.getReference("Users");
+
         user=mAuth.getCurrentUser();
         userId=user.getUid();
+        skillsDatabase=FirebaseDatabase.getInstance().getReference().child("Skills").child(userId);
+        certiDatabase=FirebaseDatabase.getInstance().getReference().child("Certificates").child(userId);
+        editProfile=getActivity().findViewById(R.id.edit_profile);
+        editProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (mActivity != null) mActivity.navigateToFragment(new EditProfileFragment(), null);
+            }
+        });
 
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -141,17 +154,52 @@ public class profile extends BaseFragment {
         listDataHeader.add("Skills");
         listDataHeader.add("Certifications");
 
-        List<String>  skills = new ArrayList<>();
+        skillsDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Skills newSkills=dataSnapshot.getValue(Skills.class);
+                List<String> items;
+                if(newSkills!=null)  items = Arrays.asList(newSkills.getSkillsdata().split("\\s*,\\s*"));
+                else{
+                    items=new ArrayList<>();
+                    items.add("NO skills added by you");
+                }
+                listHash.put(listDataHeader.get(0),items);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        certiDatabase.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                Certificates newCerti=dataSnapshot.getValue(Certificates.class);
+                List<String> items;
+                if(newCerti!=null)  items = Arrays.asList(newCerti.getCertificateData().split("\\s*,\\s*"));
+                else{
+                    items=new ArrayList<>();
+                    items.add("NO certificates added by you");
+                }
+                listHash.put(listDataHeader.get(1),items);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        //List<String>  skills = new ArrayList<>();
         //skills.add("C++");
         //skills.add("Java");
         //skills.add("Python");
         //skills.add("Web Tech");
 
-        List<String> certificates =new ArrayList<>();
+        //List<String> certificates =new ArrayList<>();
         //certificates.add("Nptel python");
 
-        listHash.put(listDataHeader.get(0),skills);
-        listHash.put(listDataHeader.get(1),certificates);
 
     }
 
