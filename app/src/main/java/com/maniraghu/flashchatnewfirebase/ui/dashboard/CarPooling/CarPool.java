@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -39,6 +40,10 @@ public class CarPool extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(CarPoolViewModel.class);
         // TODO: Use the ViewModel
+        ((AppCompatActivity)getActivity()).getSupportActionBar()
+                .setTitle("Car and bike Pooling");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         ViewPager viewPager=(ViewPager)getActivity().findViewById(R.id.viewpagerForCarPool);
         setupViewPager(viewPager);
         TabLayout tabs=(TabLayout)getActivity().findViewById(R.id.carpool_tabs);

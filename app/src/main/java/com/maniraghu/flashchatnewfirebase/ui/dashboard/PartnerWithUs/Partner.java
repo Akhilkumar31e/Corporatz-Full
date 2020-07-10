@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -43,6 +44,10 @@ public class Partner extends Fragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(PartnerViewModel.class);
         // TODO: Use the ViewModel
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar()
+                .setTitle("Fill the form");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         companyName=getActivity().findViewById(R.id.partner_company_name);
         cEmail=getActivity().findViewById(R.id.partner_email_id);

@@ -8,6 +8,7 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.maniraghu.flashchatnewfirebase.BaseFragment;
@@ -35,6 +36,11 @@ public class FeelingLonely extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(FeelingLonelyViewModel.class);
         // TODO: Use the ViewModel
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar()
+                .setTitle("Health Care 24x7");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         doctor=getActivity().findViewById(R.id.areYouADoctorButton);
         doctorList=getActivity().findViewById(R.id.doctorsListButton);
         smilePlease=getActivity().findViewById(R.id.goToSmilePlease);

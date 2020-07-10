@@ -10,12 +10,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:id="@+id/lin_forum">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Corporate Forum"
-            android:textStyle="bold"
-            android:textSize="40dp"/>
+
         <EditText
             android:id="@+id/queryText"
             android:layout_margin="10sp"

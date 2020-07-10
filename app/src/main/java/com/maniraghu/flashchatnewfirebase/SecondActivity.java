@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
@@ -24,11 +25,18 @@ public class SecondActivity extends BaseActivity implements EventListener, Botto
     final FragmentManager fm=getSupportFragmentManager();
     Fragment active = fragment1;
     @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_second);
         BottomNavigationView navView = findViewById(R.id.nav_view);
-
+        Toolbar toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         //addFragmentToContainer(new DashboardFragment(), null);
 
         // Passing each menu ID as a set of Ids because each
@@ -57,29 +65,30 @@ public class SecondActivity extends BaseActivity implements EventListener, Botto
             case R.id.navigation_home:
                 // fm.beginTransaction().hide(active).show(fragment1).commit();
                 //  active = fragment1;
+                getSupportActionBar().setTitle("Corporatz");
                 getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,new HomeFragment()).commit();
                 return true;
             case R.id.navigation_dashboard:
                 //  fm.beginTransaction().hide(active).show(fragment2).commit();
                 //  active = fragment2;
+                getSupportActionBar().setTitle("Dashboard");
                 getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,new DashboardFragment()).commit();
                 return true;
             case R.id.navigation_notifications:
                 // fm.beginTransaction().hide(active).show(fragment3).commit();
                 // active = fragment3;
+                getSupportActionBar().setTitle("Notifications");
                 getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,new NotificationsFragment()).commit();
                 return true;
             case R.id.navigation_profile:
                 // fm.beginTransaction().hide(active).show(fragment4).commit();
                 // active = fragment4;
+                getSupportActionBar().setTitle("Your Profile");
                 getSupportFragmentManager().beginTransaction().replace(R.id.nav_host_fragment,new profile()).commit();
                 return true;
 
 
         }
-
-
-
         return false;
     }
 

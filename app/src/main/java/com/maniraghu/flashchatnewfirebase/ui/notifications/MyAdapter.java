@@ -33,7 +33,9 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         Notification data = dataset.get(position);
         holder.title.setText(data.getTitle());
-        holder.subtitle.setText(data.getTimeString() + " on " + data.getDateString());
+
+
+        holder.subtitle.setText(data.getDate());
     }
 
     @Override

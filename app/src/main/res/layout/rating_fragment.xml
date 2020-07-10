@@ -24,6 +24,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:ems="10"
+                    android:textSize="40sp"
+                    android:textColor="@color/colorText"
                     android:inputType="textPersonName"
                     android:text="Company Name"
                     />
@@ -42,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Would you like to display your name Will never be disclosed to anyone"
+                android:text="Would you like to display your name(Will never be disclosed to anyone)"
                 android:textColor="@color/colorText"
                 android:layout_margin="10sp"/>
 
@@ -97,9 +99,53 @@
                 android:layout_margin="10sp"
                 android:textColor="@color/colorText"
                 android:text="* Rate the Work pressure involved this quater"/>
-
-
-            <include layout="@layout/common_layout"/>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn1"/>
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="2"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn2"
+                    />
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn3"/>
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="4"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn4"/>
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn5"/>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -107,31 +153,26 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+
+                    android:paddingLeft="10sp"
                     android:layout_weight="1"
                     android:text="Very High"/>
+
+
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+
                     android:layout_weight="1"
-                    android:layout_marginStart="30dp"
-                    android:text="High"/>
+                    android:gravity="center"
+                    android:text="Normal" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginStart="20dp"
-                    android:text="Normal" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="30dp"
-                    android:text="Less"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:paddingLeft="30sp"
                     android:text="Very Less"/>
 
 
@@ -144,7 +185,53 @@
                 android:textColor="@color/colorText"
                 android:text="* How the Infrastructure at office (furniture,Connectivity..)"
                 />
-            <include layout="@layout/common_layout"/>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn6"/>
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="2"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn7"
+                    />
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn8"/>
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="4"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn9"/>
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn10"/>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -154,32 +241,21 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginStart="20dp"
+                    android:paddingLeft="10sp"
                     android:text="Worst"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="15dp"
-                    android:layout_weight="1"
-                    android:text="Better"/>
+
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginStart="20dp"
-                    android:text="Normal" />
+                    android:gravity="center"
+                    android:text="Normal"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginStart="25dp"
-                    android:text="Good"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="10dp"
+                    android:paddingLeft="60sp"
                     android:text="Great"/>
 
             </LinearLayout>
@@ -190,7 +266,53 @@
                 android:layout_margin="10sp"
                 android:textColor="@color/colorText"
                 android:text="* Has Shuttles and Cabs for pick up and drops "/>
-            <include layout="@layout/common_layout"/>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn11"/>
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="2"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn12"
+                    />
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn13"/>
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="4"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn14"/>
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn15"/>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -199,32 +321,20 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-
+                    android:paddingLeft="10sp"
                     android:text="Never"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Some Times"/>
-
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-
                     android:text="Only Night shifts" />
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
 
-                    android:text="Occasional"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:paddingLeft="20dp"
-                    android:text="Dialy"/>
+                    android:paddingLeft="60sp"
+                    android:text="Daily"/>
 
             </LinearLayout>
             <TextView
@@ -235,7 +345,6 @@
                 android:text="* Has Power Backup?(UPS/Invertor and Generator)"
                 />
             <include layout="@layout/radio_layout"/>
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -251,7 +360,53 @@
                 android:layout_margin="10sp"
                 android:text="* Frequently conducts Fun events"
                 />
-            <include layout="@layout/common_layout"/>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn16"/>
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="2"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn17"
+                    />
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn18"/>
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="4"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn19"/>
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn20"/>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -259,11 +414,13 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+
                     android:layout_weight="1"
                     android:text="Weekly"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+
                     android:layout_weight="1"
                     android:layout_marginStart="10dp"
                     android:text="Monthly"/>
@@ -271,18 +428,21 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+
                     android:layout_weight="1"
                     android:layout_marginStart="10dp"
                     android:text="Quaterly" />
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+
                     android:layout_weight="1"
                     android:layout_marginStart="20dp"
                     android:text="Very Often"/>
                 <TextView
                     android:layout_width="0dp"
                     android:layout_marginStart="15dp"
+
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="Never"/>
@@ -296,7 +456,53 @@
                 android:textColor="@color/colorText"
                 android:text="* How difficult is the hiring exam and interview"
                 android:layout_margin="10sp"/>
-            <include layout="@layout/common_layout"/>
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content">
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn21"/>
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="2"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn22"
+                    />
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="3"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_button"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn23"/>
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="4"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn24"/>
+                <Button
+                    style="@style/Widget.AppCompat.Button.Borderless"
+                    android:layout_height="wrap_content"
+                    android:text="5"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:onClick="takeNum"
+                    android:id="@+id/btn25"/>
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
@@ -305,30 +511,22 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:paddingLeft="10sp"
                     android:text="Very Easy"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="20dp"
-                    android:text="Easy"/>
+
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:gravity="center"
                     android:text="Medium" />
+
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:layout_marginStart="30dp"
-                    android:text="Hard"/>
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginStart="20dp"
+                    android:paddingLeft="60sp"
                     android:text="Killer"/>
 
             </LinearLayout>
@@ -398,7 +596,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="20dp"
                 android:layout_gravity="center_horizontal"
-                android:background="@color/ratingColor"
+                android:background="@color/light_blue"
                 android:numStars="5"
                 android:padding="10dp"
                 android:theme="@style/RatingBar"
@@ -416,6 +614,7 @@
                 android:textColor="@color/white"
                 android:layout_margin="10dp"
                 android:id="@+id/submit_rating"
+                android:onClick="database"
 
 
                 android:text="Submit"/>

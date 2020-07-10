@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -60,6 +61,11 @@ public class SmilePleaseViewer extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(SmilePleaseViewerViewModel.class);
         // TODO: Use the ViewModel
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar()
+                .setTitle("Smile Please :)");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         post=getActivity().findViewById(R.id.post_picture_button);
         post.setOnClickListener(new View.OnClickListener() {
             @Override

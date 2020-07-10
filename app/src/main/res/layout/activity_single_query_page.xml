@@ -6,10 +6,13 @@
     android:layout_height="match_parent"
 
     tools:context=".ui.dashboard.CorporateForum.SingleQueryPage">
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:layout_below="@+id/toolbar"
         android:id="@+id/rep_lin">
         <androidx.cardview.widget.CardView
             xmlns:android="http://schemas.android.com/apk/res/android"

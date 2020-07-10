@@ -57,11 +57,13 @@ public class RequestRideFragment extends Fragment {
         destination=getActivity().findViewById(R.id.requestDestination);
         search=getActivity().findViewById(R.id.request_ride_button);
         noResult=getActivity().findViewById(R.id.noResultMessage);
+        progressCircle=getActivity().findViewById(R.id.ride_progress_circle);
+        progressCircle.setVisibility(View.INVISIBLE);
         search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-
+                progressCircle.setVisibility(View.VISIBLE);
                 recyclerView=(RecyclerView)getActivity().findViewById(R.id.request_recyclerView);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 recyclerView.setHasFixedSize(true);
@@ -73,12 +75,18 @@ public class RequestRideFragment extends Fragment {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         for(DataSnapshot rideSnapshot:dataSnapshot.getChildren()){
                             RideInformation rideInformation=rideSnapshot.getValue(RideInformation.class);
-
-                            if(rideInformation.getSource().equals(source.getText().toString())&&rideInformation.getDestination().equals(destination.getText().toString()))
+                            boolean sourceFound= source.getText().toString().matches("(?i).*"+rideInformation.getSource()+".*");
+                            boolean destFound = destination.getText().toString().matches("(?i).*"+rideInformation.getDestination()+".*");
+                            boolean sf2 = rideInformation.getSource().matches("(?i).*"+source.getText().toString()+".*");
+                            //boolean df2=  rideInformation.getDestination().matches("(?i).*"+destination.getText().toString()+".*");
+                            //if(rideInformation.getSource().equals(source.getText().toString())&&rideInformation.getDestination().equals(destination.getText().toString()))
+                            if(sourceFound||destFound||sf2)
                             mRide.add(rideInformation);
                         }
                         if(mRide.size()==0){
                             noResult.setText("No rides available at the moment at "+source.getText().toString());
+                            rideRequest = new RideRequest(getContext(), mRide);
+                            recyclerView.setAdapter(rideRequest);
                         }
                         else {
                             noResult.setText("");
@@ -86,10 +94,12 @@ public class RequestRideFragment extends Fragment {
                             recyclerView.setAdapter(rideRequest);
 
                         }
+                        progressCircle.setVisibility(View.INVISIBLE);
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {
+                        progressCircle.setVisibility(View.INVISIBLE);
                     }
                 });
             }

@@ -1,6 +1,7 @@
 package com.maniraghu.flashchatnewfirebase.ui.dashboard.SmilePlease;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.maniraghu.flashchatnewfirebase.R;
+import com.maniraghu.flashchatnewfirebase.ui.ProfilePageActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -25,7 +27,7 @@ import java.util.List;
 public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRecyclerView.SmilePleaseViewHolder> {
     private Context mContext;
     private List<Upload> mPost;
-    private DatabaseReference mDatabase;
+    private DatabaseReference mDatabase,notiDatabase;
     private FirebaseAuth mAuth;
     private boolean mProcessLike=false;
     private boolean mProcessDisike=false;
@@ -46,7 +48,7 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
         final Upload uploads=mPost.get(position);
         final String post_key=uploads.getmPostId();
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Reactions");
-
+        notiDatabase = FirebaseDatabase.getInstance().getReference().child("notifications").child(uploads.getmId());
         mAuth=FirebaseAuth.getInstance();
 
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -71,6 +73,14 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
             }
         });
         holder.username.setText(uploads.getmUsername());
+        holder.username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent next=new Intent(mContext, ProfilePageActivity.class);
+                next.putExtra("userid",uploads.getmId());
+                mContext.startActivity(next);
+            }
+        });
         holder.time.setText(uploads.getmTime());
         holder.desc.setText(uploads.getmDesc());
         String taggedUser=uploads.getmTaggedUserId();
@@ -135,6 +145,7 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
                                 }
                                 mDatabase.child("Dislikes").child(post_key).child(mAuth.getCurrentUser().getUid()).setValue("Dislike");
                                 holder.dislike.setImageResource(R.drawable.ic_thumb_down_blue_24dp);
+
                                 mProcessDisike=false;
                             }
                         }

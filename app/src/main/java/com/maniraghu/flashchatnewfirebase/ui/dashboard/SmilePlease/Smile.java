@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -80,6 +81,11 @@ public class Smile extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar()
+                .setTitle("Post a Picture");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         mViewModel = ViewModelProviders.of(this).get(SmileViewModel.class);
 
         mButtonChooseImage = getActivity().findViewById(R.id.button_choose_image);

@@ -1,4 +1,4 @@
-package com.maniraghu.flashchatnewfirebase.ui.dashboard.WellBeingCorner;
+package com.maniraghu.flashchatnewfirebase.ui.dashboard.WomensCorner;
 
 import android.os.Bundle;
 import android.widget.ImageView;
@@ -15,10 +15,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.maniraghu.flashchatnewfirebase.R;
-import com.maniraghu.flashchatnewfirebase.ui.home.NewsInformation;
 import com.squareup.picasso.Picasso;
 
-public class SinglePost extends AppCompatActivity {
+public class WomenSinglePost extends AppCompatActivity {
     private ImageView img;
     private TextView singleTitle,singleDesc;
     String title;
@@ -33,12 +32,14 @@ public class SinglePost extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_post);
+
         Toolbar toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("More");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("wellbeing");
+
+        mDatabase = FirebaseDatabase.getInstance().getReference("womenscorner");
         mAuth=FirebaseAuth.getInstance();
         img = (ImageView)findViewById(R.id.imageView);
 
@@ -49,14 +50,13 @@ public class SinglePost extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot d:dataSnapshot.getChildren()){
-                    NewsInformation newsInformation=d.getValue(NewsInformation.class);
-                    if(newsInformation.getTitle().equals(title)){
-                        singleTitle.setText(newsInformation.getTitle());
-                        singleDesc.setText(newsInformation.getDesc());
-                        Picasso.with(SinglePost.this).load(newsInformation.getImgurl())
+                    WorkingWomenInfo newsInformation=d.getValue(WorkingWomenInfo.class);
+                    if(newsInformation.getPostTitle().equals(title)){
+                        singleTitle.setText(newsInformation.getPostTitle());
+                        singleDesc.setText(newsInformation.getPostDesc());
+                        Picasso.with(WomenSinglePost.this).load(newsInformation.getPostUrl())
                                 .placeholder(R.drawable.grad)
                                 .into(img);
-
                     }
                 }
             }

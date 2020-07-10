@@ -7,12 +7,14 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -34,7 +36,7 @@ public class NotificationsFragment extends Fragment {
     private SimpleSectionedRecyclerViewAdapter sectionedAdapter;
     private List<Notification> dataset;
     private List<SimpleSectionedRecyclerViewAdapter.Section> sections;
-
+    private FirebaseAuth mAuth;
     private DatabaseReference db;
 
     public View onCreateView(LayoutInflater inflater,
@@ -49,6 +51,13 @@ public class NotificationsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar()
+                .setTitle("Notifications");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
+        mAuth=FirebaseAuth.getInstance();
+        String currUser=mAuth.getCurrentUser().getUid();
         dataset = new ArrayList<>();
 
         recyclerView = getActivity().findViewById(R.id.noti_recycler_view);
@@ -69,7 +78,7 @@ public class NotificationsFragment extends Fragment {
 
         recyclerView.setAdapter(sectionedAdapter);
 
-        db = FirebaseDatabase.getInstance().getReference("notifications");
+        db = FirebaseDatabase.getInstance().getReference("notifications").child(currUser);
 
         getData();
     }
@@ -92,6 +101,12 @@ public class NotificationsFragment extends Fragment {
                     }
                     i++;
                 }
+                Notification welcome = new Notification("Welcome to Corporatz","Thank you for joining us.");
+                dataset.add(welcome);
+                if(!uniq.containsKey(welcome.getDateString())) {
+                    uniq.put(welcome.getDateString(), i);
+                }
+                i++;
                 for(String key: uniq.keySet()) {
                     sections.add(new SimpleSectionedRecyclerViewAdapter.Section(uniq.get(key), key));
                 }

@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -48,10 +49,20 @@ public class SingleQueryPage extends AppCompatActivity {
     private DatabaseReference mDatabaseRef,mUserDatabase,mReplyDatabase;
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_query_page);
+
+        Toolbar toolbar=findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Query");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         recyclerView = (RecyclerView)findViewById(R.id.reply_recyclerview);
         progressCircle=findViewById(R.id.reply_progress_circle);
         recyclerView.setLayoutManager(new LinearLayoutManager((getApplicationContext())));

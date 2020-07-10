@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.maniraghu.flashchatnewfirebase.R;
-import com.maniraghu.flashchatnewfirebase.ui.home.SinglePostActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -47,7 +46,7 @@ public class WorkingWomenFeed extends RecyclerView.Adapter<WorkingWomenFeed.Wome
         holder.mView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent next=new Intent(mContext, SinglePostActivity.class);
+                Intent next=new Intent(mContext, WomenSinglePost.class);
                 next.putExtra("post",current.getPostTitle());
                 mContext.startActivity(next);
             }

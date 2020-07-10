@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,6 +52,10 @@ public class JobSecurity extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(JobSecurityViewModel.class);
         // TODO: Use the ViewModel
+        ((AppCompatActivity)getActivity()).getSupportActionBar()
+                .setTitle("Job Security");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         recyclerView=(RecyclerView)getActivity().findViewById(R.id.job_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager((getContext())));
         recyclerView.setHasFixedSize(true);

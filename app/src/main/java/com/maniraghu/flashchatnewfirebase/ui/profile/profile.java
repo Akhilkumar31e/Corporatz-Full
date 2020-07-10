@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -42,7 +43,7 @@ public class profile extends BaseFragment {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseDatabase mFirebaseDatabase;
-    public DatabaseReference myRef,skillsDatabase,certiDatabase;
+    public DatabaseReference myRef,skillsDatabase,certiDatabase,people;
     private String userId;
     public String userName;
     Button logout,faq,contact,about,subscription;
@@ -50,7 +51,7 @@ public class profile extends BaseFragment {
     private ExpandableList listAdapter;
     private List<String> listDataHeader;
     private HashMap<String,List<String>> listHash;
-    public TextView tvUser;
+    public TextView tvUser,followers,following;
     private  TextView comReg;
     private LinearLayout editProfile;
     public  FirebaseUser user;
@@ -69,6 +70,11 @@ public class profile extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
         // TODO: Use the ViewModel
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar()
+                .setTitle("Profile");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+
         mAuth=FirebaseAuth.getInstance();
         mFirebaseDatabase=FirebaseDatabase.getInstance();
         myRef=mFirebaseDatabase.getReference("Users");
@@ -77,6 +83,8 @@ public class profile extends BaseFragment {
         userId=user.getUid();
         skillsDatabase=FirebaseDatabase.getInstance().getReference().child("Skills").child(userId);
         certiDatabase=FirebaseDatabase.getInstance().getReference().child("Certificates").child(userId);
+        people=FirebaseDatabase.getInstance().getReference().child("people");
+
         editProfile=getActivity().findViewById(R.id.edit_profile);
         editProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,6 +146,10 @@ public class profile extends BaseFragment {
         initData();
         listAdapter = new ExpandableList(getContext(),listDataHeader,listHash);
         listView.setAdapter(listAdapter);
+        followers=getActivity().findViewById(R.id.my_followers);
+        following=getActivity().findViewById(R.id.my_following);
+
+
     }
     public void out(){
         String res="Logged Out Successfully";
@@ -210,7 +222,18 @@ public class profile extends BaseFragment {
                 userInformation.setUsername(ds.child(userId).getValue(UserInformation.class).getUsername());
                 userInformation.setCompanyname(ds.child(userId).getValue(UserInformation.class).getCompanyname());
                 userInformation.setRegion(ds.child(userId).getValue(UserInformation.class).getRegion());
+                people.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        followers.setText(String.valueOf(dataSnapshot.child("Followers").child(userId).getChildrenCount()));
+                        following.setText(String.valueOf(dataSnapshot.child("Following").child(userId).getChildrenCount()));
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
                 if (userInformation.getUsername() != null) {
                     tvUser.setText(userInformation.getUsername());

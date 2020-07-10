@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -47,7 +48,9 @@ public class DashboardFragment extends BaseFragment {
     public void onViewCreated(View view, Bundle savedInstanceState){
         super.onViewCreated(view,savedInstanceState);
         Bundle args=new Bundle();
-
+        ((AppCompatActivity)getActivity()).getSupportActionBar()
+                .setTitle("Dashboard");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         cvrate=(CardView) view.findViewById(R.id.rate);
         cvrate.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.google.firebase.database.DatabaseReference;
@@ -41,6 +42,12 @@ public class PostJobFragment extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(PostJobViewModel.class);
         // TODO: Use the ViewModel
+
+        ((AppCompatActivity)getActivity()).getSupportActionBar()
+                .setTitle("Post a Job");
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
         mDatabase= FirebaseDatabase.getInstance().getReference().child("jobInfo");
         job_name=getActivity().findViewById(R.id.post_job_name);
         company_name= getActivity().findViewById(R.id.post_company_name);

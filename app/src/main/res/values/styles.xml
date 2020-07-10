@@ -14,9 +14,9 @@
     </style>
 
     <style name="RatingBar" parent="Theme.AppCompat">
+
         <item name="colorControlActivated">@color/white</item>
     </style>
-
 
     <style name="FlatButton" parent="Theme.AppCompat.Light">
         <item name="android:textColor">@color/blue</item>

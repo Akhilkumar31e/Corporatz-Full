@@ -9,14 +9,47 @@
     android:background="@drawable/background"
     android:layout_height="match_parent">
 
-   <TextView
-       android:id="@+id/welcome_msg"
+
+   <LinearLayout
+       android:id="@+id/search_layout"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
-      android:text="@string/Corporatz_heading"
-       android:textSize="30dp"
-      android:textAlignment="center"
-       android:textColor="@color/black"/>
+      android:orientation="horizontal">
+      <com.google.android.material.textfield.TextInputLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:textColorHint="@color/black"
+          >
+         <AutoCompleteTextView
+             android:id="@+id/search_people"
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:hint="Search People ... "
+             android:imeOptions="actionNext"
+             android:inputType="textNoSuggestions"
+             android:maxLines="1"
+             android:textColor="@color/black"
+             android:textColorHint="@color/black"
+             android:textIsSelectable="false"
+             android:textSize="22sp" />
+
+      </com.google.android.material.textfield.TextInputLayout>
+      <ImageButton
+          android:id="@+id/search_button"
+          android:layout_width="0dp"
+          android:layout_height="match_parent"
+          android:layout_weight="0.2"
+          android:src="@drawable/ic_search_black_24dp"
+          android:background="@color/white"
+          />
+   </LinearLayout>
+   <androidx.recyclerview.widget.RecyclerView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:id="@+id/search_recyclerview"
+       android:layout_below="@+id/search_layout">
+
+   </androidx.recyclerview.widget.RecyclerView>
    <ProgressBar
        android:id="@+id/progress_circle"
        android:layout_width="wrap_content"
@@ -25,9 +58,9 @@
 
    <androidx.recyclerview.widget.RecyclerView
        android:layout_width="match_parent"
-       android:layout_height="match_parent"
+       android:layout_height="wrap_content"
        android:id="@+id/recyclerview"
-       android:layout_below="@+id/welcome_msg">
+       android:layout_below="@+id/search_recyclerview">
 
    </androidx.recyclerview.widget.RecyclerView>
 

@@ -1,6 +1,7 @@
 package com.maniraghu.flashchatnewfirebase.ui.dashboard.Rating;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.maniraghu.flashchatnewfirebase.R;
+import com.maniraghu.flashchatnewfirebase.ui.ProfilePageActivity;
 import com.maniraghu.flashchatnewfirebase.ui.profile.UserInformation;
 
 import java.util.List;
@@ -47,6 +49,7 @@ public class AllRatingsRecyclerView extends RecyclerView.Adapter<AllRatingsRecyc
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 UserInformation user=dataSnapshot.child(uId).getValue(UserInformation.class);
                 holder.username.setText(user.getUsername());
+
             }
 
             @Override
@@ -54,7 +57,14 @@ public class AllRatingsRecyclerView extends RecyclerView.Adapter<AllRatingsRecyc
 
             }
         });
-
+        holder.username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent next=new Intent(mContext, ProfilePageActivity.class);
+                next.putExtra("userid",ratings.getUserId());
+                mContext.startActivity(next);
+            }
+        });
         holder.companyName.setText(ratings.getCompanyName());
         holder.review.setText(ratings.getCompanyReview());
         Float rValue=Float.parseFloat(ratings.companyRating);
