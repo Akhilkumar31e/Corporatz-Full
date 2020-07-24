@@ -14,31 +14,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             >
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10sp">
-                <TextView
-                    android:id="@+id/tvCom"
-                    android:layout_width="200sp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
-                    android:textSize="40sp"
-                    android:textColor="@color/colorText"
-                    android:inputType="textPersonName"
-                    android:text="Company Name"
-                    />
-                <TextView
-                    android:id="@+id/finalView"
-                    android:layout_width="100sp"
-                    android:textColor="@color/colorText"
-                    android:textSize="40dp"
-                    android:layout_height="wrap_content"/>
-
-            </LinearLayout>
-
-
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"

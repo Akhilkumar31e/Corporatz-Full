@@ -61,8 +61,8 @@ public class History extends RecyclerView.Adapter<History.HistoryViewHolder> {
         });
         holder.destination.setText("To : "+current.getDestination());
         holder.source.setText("Starting at: "+current.getSource());
-
-        holder.price.setText("Price : "+current.getCost()+"/-");
+        if(current.getCost().equals("")) holder.price.setText("Price : Free");
+        else holder.price.setText("Price : ₹"+current.getCost());
         holder.time.setText("Time : "+current.getTime());
         final String call=current.getMobile();
         holder.close.setOnClickListener(new View.OnClickListener() {

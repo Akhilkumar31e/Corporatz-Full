@@ -1,5 +1,7 @@
 package com.maniraghu.flashchatnewfirebase.ui.profile;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -7,11 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -28,6 +32,7 @@ import com.maniraghu.flashchatnewfirebase.ui.profile.AboutUsFragment.AboutUsFrag
 import com.maniraghu.flashchatnewfirebase.ui.profile.ContactUsFragment.ContactUsFragment;
 import com.maniraghu.flashchatnewfirebase.ui.profile.FAQFragment.FAQFragment;
 import com.maniraghu.flashchatnewfirebase.ui.profile.SubscriptionPlans.SubscriptionPlans;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,18 +48,19 @@ public class profile extends BaseFragment {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     private FirebaseDatabase mFirebaseDatabase;
-    public DatabaseReference myRef,skillsDatabase,certiDatabase,people;
+    private DatabaseReference myRef,skillsDatabase,certiDatabase,people;
     private String userId;
-    public String userName;
-    Button logout,faq,contact,about,subscription;
+    private String userName;
+    private Button logout,faq,contact,about,subscription;
     private ExpandableListView listView;
     private ExpandableList listAdapter;
     private List<String> listDataHeader;
     private HashMap<String,List<String>> listHash;
-    public TextView tvUser,followers,following;
+    private TextView tvUser,followers,following;
     private  TextView comReg;
     private LinearLayout editProfile;
     public  FirebaseUser user;
+    private ImageView profilePic;
     public static profile newInstance() {
         return new profile();
     }
@@ -70,7 +76,7 @@ public class profile extends BaseFragment {
         super.onActivityCreated(savedInstanceState);
         mViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
         // TODO: Use the ViewModel
-
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE);
         ((AppCompatActivity)getActivity()).getSupportActionBar()
                 .setTitle("Profile");
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -78,7 +84,29 @@ public class profile extends BaseFragment {
         mAuth=FirebaseAuth.getInstance();
         mFirebaseDatabase=FirebaseDatabase.getInstance();
         myRef=mFirebaseDatabase.getReference("Users");
+        profilePic=getActivity().findViewById(R.id.profile_user_image);
+        profilePic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder alert=new AlertDialog.Builder(getContext());
+                alert.setMessage("Do you want to upload new profile picture?");
+                alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        if(mActivity!=null) mActivity.navigateToFragment(new UploadProfilePic(),null);
+                    }
+                });
+                alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                AlertDialog dialog= alert.create();
+                dialog.show();
 
+            }
+        });
         user=mAuth.getCurrentUser();
         userId=user.getUid();
         skillsDatabase=FirebaseDatabase.getInstance().getReference().child("Skills").child(userId);
@@ -202,17 +230,6 @@ public class profile extends BaseFragment {
 
             }
         });
-
-        //List<String>  skills = new ArrayList<>();
-        //skills.add("C++");
-        //skills.add("Java");
-        //skills.add("Python");
-        //skills.add("Web Tech");
-
-        //List<String> certificates =new ArrayList<>();
-        //certificates.add("Nptel python");
-
-
     }
 
     private void read(DataSnapshot ds){
@@ -222,11 +239,39 @@ public class profile extends BaseFragment {
                 userInformation.setUsername(ds.child(userId).getValue(UserInformation.class).getUsername());
                 userInformation.setCompanyname(ds.child(userId).getValue(UserInformation.class).getCompanyname());
                 userInformation.setRegion(ds.child(userId).getValue(UserInformation.class).getRegion());
+                String profileUrl=ds.child(userId).child("profilePic").getValue(String.class);
+                if(profileUrl!=null){
+                    Picasso.with(getContext())
+                            .load(profileUrl)
+                            .placeholder(R.drawable.ic_account_circle_black_24dp)
+                            .fit()
+                            .centerCrop()
+                            .transform(new CircleTransform())
+                            .into(profilePic);
+                }
                 people.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         followers.setText(String.valueOf(dataSnapshot.child("Followers").child(userId).getChildrenCount()));
+                        followers.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent next=new Intent(getContext(), FollowList.class);
+                                next.putExtra("type","Followers");
+                                next.putExtra("userId",userId);
+                                getContext().startActivity(next);
+                            }
+                        });
                         following.setText(String.valueOf(dataSnapshot.child("Following").child(userId).getChildrenCount()));
+                        following.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent next=new Intent(getContext(), FollowList.class);
+                                next.putExtra("type","Following");
+                                next.putExtra("userId",userId);
+                                getContext().startActivity(next);
+                            }
+                        });
                     }
 
                     @Override

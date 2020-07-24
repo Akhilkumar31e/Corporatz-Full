@@ -61,7 +61,7 @@
                 android:id="@+id/post_salary"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Mention Salary(LPA)"
+                android:hint="Mention Salary in Rupees"
                 android:imeOptions="actionNext"
                 android:inputType="textNoSuggestions"
                 android:maxLines="1"

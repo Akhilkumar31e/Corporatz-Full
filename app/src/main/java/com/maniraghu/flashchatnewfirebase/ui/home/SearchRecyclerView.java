@@ -41,6 +41,7 @@ public class SearchRecyclerView extends RecyclerView.Adapter<SearchRecyclerView.
             public void onClick(View view) {
                 Intent next=new Intent(mContext, ProfilePageActivity.class);
                 next.putExtra("userid",info.getUserId());
+                next.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(next);
             }
         });

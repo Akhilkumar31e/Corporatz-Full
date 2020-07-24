@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.maniraghu.flashchatnewfirebase.R;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -71,6 +72,7 @@ public class HistoryFragment extends Fragment {
                           if(!hashRide.contains(ri.getRideId()))  mRide.add(ri);
                           hashRide.add(ri.getRideId());
                     }
+                    Collections.reverse(mRide);
                     history=new History(getContext(),mRide);
                     recyclerView.setAdapter(history);
                     progressCircle.setVisibility(View.INVISIBLE);

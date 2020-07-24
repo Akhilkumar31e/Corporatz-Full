@@ -2,14 +2,21 @@ package com.maniraghu.flashchatnewfirebase.ui.dashboard.SmilePlease;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.FileProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -21,8 +28,15 @@ import com.google.firebase.database.ValueEventListener;
 import com.maniraghu.flashchatnewfirebase.R;
 import com.maniraghu.flashchatnewfirebase.ui.ProfilePageActivity;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRecyclerView.SmilePleaseViewHolder> {
     private Context mContext;
@@ -31,6 +45,8 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
     private FirebaseAuth mAuth;
     private boolean mProcessLike=false;
     private boolean mProcessDisike=false;
+    private Calendar calendar;
+    private SimpleDateFormat dateFormat;
     public SmilePleaseRecyclerView(Context mContext, List<Upload> mPost) {
         this.mContext = mContext;
         this.mPost = mPost;
@@ -50,7 +66,7 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
         mDatabase= FirebaseDatabase.getInstance().getReference().child("Reactions");
         notiDatabase = FirebaseDatabase.getInstance().getReference().child("notifications").child(uploads.getmId());
         mAuth=FirebaseAuth.getInstance();
-
+        notiDatabase = FirebaseDatabase.getInstance().getReference().child("notifications").child(uploads.getmId());
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -112,6 +128,14 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
                                         holder.dislike.setImageResource(R.drawable.ic_thumb_down_black_24dp);
                                     }
                                     mDatabase.child("Likes").child(post_key).child(mAuth.getCurrentUser().getUid()).setValue("Like");
+                                    String push_key = notiDatabase.push().getKey();
+                                    String notiMsg="You reaceived a like for your post";
+                                    calendar= Calendar.getInstance();
+                                    dateFormat=new SimpleDateFormat("MMMM dd,yyyy HH:mm:ss", Locale.US);
+                                    /*String time=dateFormat.format(calendar.getTime());
+                                    final Notification newNoti= new Notification(notiMsg,time);
+                                    notiDatabase.child(push_key).setValue(newNoti);
+                                    Log.d("user like",uploads.getmId());*/
                                     holder.like.setImageResource(R.drawable.ic_thumb_up_blue_24dp);
                                     mProcessLike = false;
                                 }
@@ -157,6 +181,43 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
                 });
             }
         });
+        holder.share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext,"Just a moment!",Toast.LENGTH_LONG).show();
+                String shareMessage = "Check out this photo by "+uploads.getmUsername()+" from CORPORATZ,The employees' app";
+                shareItem(uploads.getmImageUrl(),shareMessage);
+            }
+        });
+    }
+
+    public void shareItem(final String url, final String shareMessage) {
+        Picasso.with(mContext).load(url).into(new Target() {
+            @Override public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("image/*");
+                i.putExtra(Intent.EXTRA_TEXT,shareMessage);
+                i.putExtra(Intent.EXTRA_STREAM,getLocalBitmapUri(bitmap));
+                i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                mContext.startActivity(Intent.createChooser(i, "Share Image"));
+            }
+            @Override public void onBitmapFailed(Drawable errorDrawable) { }
+            @Override public void onPrepareLoad(Drawable placeHolderDrawable) { }
+        });
+    }
+
+    public Uri getLocalBitmapUri(Bitmap bmp) {
+        Uri bmpUri = null;
+        try {
+            File file =  new File(mContext.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "share_image_" + System.currentTimeMillis() + ".png");
+            FileOutputStream out = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.PNG, 90, out);
+            out.close();
+            bmpUri = FileProvider.getUriForFile(mContext, mContext.getPackageName() + ".provider", file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return bmpUri;
     }
 
     @Override
@@ -176,6 +237,7 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
         public ImageButton like;
         public ImageButton dislike;
         public TextView userTag;
+        public LinearLayout share;
         public SmilePleaseViewHolder(View itemView) {
             super(itemView);
             mView=itemView;
@@ -188,6 +250,7 @@ public class SmilePleaseRecyclerView extends RecyclerView.Adapter<SmilePleaseRec
             noOfLikes=itemView.findViewById(R.id.smile_likes);
             noOfDislikes=itemView.findViewById(R.id.smile_dislikes);
             userTag= itemView.findViewById(R.id.smile_tagged_username);
+            share=itemView.findViewById(R.id.smile_share_layout);
         }
     }
 }

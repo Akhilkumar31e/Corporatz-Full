@@ -6,31 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".ui.dashboard.CarPooling.CarPool"
     >
+
     <RelativeLayout
-        android:id="@+id/relForTop"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:background="@drawable/grad"
-       >
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="20dp">
-            <TextView
-                android:layout_marginTop="50dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="CAR and BIKE POOLING"
-                android:textColor="@color/white"
-                android:fontFamily="sans-serif-condensed-light"
-                android:layout_centerHorizontal="true"
-                android:textSize="30dp"
-                android:textStyle="bold"/>
-        </RelativeLayout>
-    </RelativeLayout>
-    <RelativeLayout
-        android:layout_below="@id/relForTop"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <com.google.android.material.appbar.AppBarLayout
@@ -51,6 +29,7 @@
             android:id="@+id/viewpagerForCarPool"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_below="@+id/appbar"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     </RelativeLayout>

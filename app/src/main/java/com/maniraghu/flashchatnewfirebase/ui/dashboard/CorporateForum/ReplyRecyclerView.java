@@ -1,6 +1,7 @@
 package com.maniraghu.flashchatnewfirebase.ui.dashboard.CorporateForum;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.maniraghu.flashchatnewfirebase.R;
+import com.maniraghu.flashchatnewfirebase.ui.ProfilePageActivity;
 
 import java.util.List;
 
@@ -36,6 +38,15 @@ public class ReplyRecyclerView extends RecyclerView.Adapter<ReplyRecyclerView.Re
         holder.username.setText(queries.getqUsername()+" replied");
         holder.time.setText(queries.getqTime());
         holder.desc.setText(queries.getqQuery());
+        holder.username.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent next=new Intent(mContext, ProfilePageActivity.class);
+                next.putExtra("userid",queries.getqId());
+                next.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(next);
+            }
+        });
     }
 
     @Override

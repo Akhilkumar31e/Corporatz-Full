@@ -1,10 +1,12 @@
 package com.maniraghu.flashchatnewfirebase.ui;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,28 +20,38 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.maniraghu.flashchatnewfirebase.R;
+import com.maniraghu.flashchatnewfirebase.ui.notifications.Notification;
 import com.maniraghu.flashchatnewfirebase.ui.profile.Certificates;
+import com.maniraghu.flashchatnewfirebase.ui.profile.CircleTransform;
 import com.maniraghu.flashchatnewfirebase.ui.profile.ExpandableList;
+import com.maniraghu.flashchatnewfirebase.ui.profile.FollowList;
 import com.maniraghu.flashchatnewfirebase.ui.profile.Skills;
 import com.maniraghu.flashchatnewfirebase.ui.profile.UserInformation;
+import com.squareup.picasso.Picasso;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class ProfilePageActivity extends AppCompatActivity {
     private TextView username;
     private TextView place,followers,following;;
     private Button follow;
     private DatabaseReference userProfile,people;
-    public DatabaseReference skillsDatabase,certiDatabase;
+    public DatabaseReference skillsDatabase,certiDatabase,userDatabase,notiDatabase;
     private FirebaseAuth mAuth;
     private ExpandableListView listView;
     private ExpandableList listAdapter;
     private List<String> listDataHeader;
     private HashMap<String,List<String>> listHash;
+    private ImageView profilePic;
     private boolean processFollow;
+    private Calendar calendar;
+    private SimpleDateFormat dateFormat;
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -63,12 +75,14 @@ public class ProfilePageActivity extends AppCompatActivity {
         followers=findViewById(R.id.profile_followers);
         following=findViewById(R.id.profile_following);
         listView= (ExpandableListView)findViewById(R.id.profile_expand);
-
+        profilePic=findViewById(R.id.profile_other_user_image);
 
         final String userId=getIntent().getExtras().getString("userid");
 
         skillsDatabase=FirebaseDatabase.getInstance().getReference().child("Skills").child(userId);
         certiDatabase=FirebaseDatabase.getInstance().getReference().child("Certificates").child(userId);
+        userDatabase = FirebaseDatabase.getInstance().getReference().child("Users");
+        notiDatabase=FirebaseDatabase.getInstance().getReference().child("notifications");
         initData();
         listAdapter = new ExpandableList(this,listDataHeader,listHash);
 
@@ -84,6 +98,14 @@ public class ProfilePageActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 final UserInformation user=dataSnapshot.getValue(UserInformation.class);
+                String profilePicUri=dataSnapshot.child("profilePic").getValue(String.class);
+                Picasso.with(getApplicationContext())
+                        .load(profilePicUri)
+                        .placeholder(R.drawable.ic_account_circle_black_24dp)
+                        .fit()
+                        .centerCrop()
+                        .transform(new CircleTransform())
+                        .into(profilePic);
                 username.setText(user.getUsername());
                 getSupportActionBar().setTitle(user.getUsername());
                 place.setText(user.getCompanyname()+","+user.getRegion());
@@ -107,7 +129,25 @@ public class ProfilePageActivity extends AppCompatActivity {
                             }
                         }
                         followers.setText(String.valueOf(dataSnapshot.child("Followers").child(userId).getChildrenCount()));
+                        followers.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent next=new Intent(getApplicationContext(), FollowList.class);
+                                next.putExtra("type","Followers");
+                                next.putExtra("userId",userId);
+                                startActivity(next);
+                            }
+                        });
                         following.setText(String.valueOf(dataSnapshot.child("Following").child(userId).getChildrenCount()));
+                        following.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                Intent next=new Intent(getApplicationContext(), FollowList.class);
+                                next.putExtra("type","Following");
+                                next.putExtra("userId",userId);
+                                startActivity(next);
+                            }
+                        });
                     }
 
                     @Override
@@ -136,7 +176,27 @@ public class ProfilePageActivity extends AppCompatActivity {
                                         follow.setText("Following");
                                         follow.setBackgroundColor(Color.parseColor("#FFFFFF"));
                                         follow.setTextColor(Color.parseColor("#05C0F0"));
-                                        people.child("Followers").child(userId).child(currUserId).setValue("new");
+
+                                        userDatabase.child(currUserId).addValueEventListener(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                                UserInformation currInfo= dataSnapshot.getValue(UserInformation.class);
+                                                String notiMsg=currInfo.getUsername()+" started following you";
+                                                calendar= Calendar.getInstance();
+                                                dateFormat=new SimpleDateFormat("MMMM dd,yyyy HH:mm:ss", Locale.US);
+                                                String time=dateFormat.format(calendar.getTime());
+                                                final Notification newNoti= new Notification(notiMsg,time);
+
+                                                String push_key=notiDatabase.child(userId).push().getKey();
+
+                                                people.child("Followers").child(userId).child(currUserId).setValue(currInfo.getUsername());
+                                                notiDatabase.child(userId).child(push_key).setValue(newNoti);
+                                            }
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                            }
+                                        });
                                         people.child("Following").child(currUserId).child(userId).setValue(user.getUsername());
                                         processFollow=false;
                                     }

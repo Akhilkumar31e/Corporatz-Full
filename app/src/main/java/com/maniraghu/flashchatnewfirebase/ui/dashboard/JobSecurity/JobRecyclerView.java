@@ -37,7 +37,7 @@ public class JobRecyclerView extends RecyclerView.Adapter<JobRecyclerView.JobVie
         final JobInfo jobs=mList.get(position);
         holder.jobName.setText(jobs.getJobName());
         holder.companyName.setText(jobs.getCompanyName());
-        holder.salary.setText(jobs.getSalary());
+        holder.salary.setText("₹"+jobs.getSalary());
 
         holder.contact.setOnClickListener(new View.OnClickListener() {
             @Override

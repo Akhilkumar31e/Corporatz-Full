@@ -148,6 +148,7 @@
                 </LinearLayout>
                 <LinearLayout
                     android:layout_width="0dp"
+                    android:id="@+id/smile_share_layout"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:layout_weight="1"

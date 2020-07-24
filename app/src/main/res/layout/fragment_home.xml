@@ -29,9 +29,8 @@
              android:inputType="textNoSuggestions"
              android:maxLines="1"
              android:textColor="@color/black"
-             android:textColorHint="@color/black"
              android:textIsSelectable="false"
-             android:textSize="22sp" />
+              />
 
       </com.google.android.material.textfield.TextInputLayout>
       <ImageButton

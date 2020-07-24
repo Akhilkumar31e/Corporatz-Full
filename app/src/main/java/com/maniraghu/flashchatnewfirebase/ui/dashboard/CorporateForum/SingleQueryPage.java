@@ -1,5 +1,6 @@
 package com.maniraghu.flashchatnewfirebase.ui.dashboard.CorporateForum;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.maniraghu.flashchatnewfirebase.R;
+import com.maniraghu.flashchatnewfirebase.ui.ProfilePageActivity;
+import com.maniraghu.flashchatnewfirebase.ui.notifications.Notification;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -29,6 +32,7 @@ import java.util.Calendar;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 
 public class SingleQueryPage extends AppCompatActivity {
     private List<Query> queryList;
@@ -45,8 +49,8 @@ public class SingleQueryPage extends AppCompatActivity {
     private EditText replyText;
     private FirebaseAuth mAuth;
     private FirebaseUser user;
-    private String uId,currUser;
-    private DatabaseReference mDatabaseRef,mUserDatabase,mReplyDatabase;
+    private String uId,currUser,queryUser;
+    private DatabaseReference mDatabaseRef,mUserDatabase,mReplyDatabase,notiDatabase;
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
     public boolean onSupportNavigateUp() {
@@ -75,13 +79,24 @@ public class SingleQueryPage extends AppCompatActivity {
         query_id=getIntent().getStringExtra("queryId");
         String path="forum/"+query_id;
         mReference= FirebaseDatabase.getInstance().getReference(path);
+
         mReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Query q=dataSnapshot.getValue(Query.class);
+                final Query q=dataSnapshot.getValue(Query.class);
                 username.setText(q.getqUsername());
+                username.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent next=new Intent(getApplicationContext(), ProfilePageActivity.class);
+                        next.putExtra("userid",q.getqId());
+                        startActivity(next);
+                    }
+                });
                 time.setText(q.getqTime());
                 desc.setText(q.getqQuery());
+                queryUser=q.getqId();
+                notiDatabase = FirebaseDatabase.getInstance().getReference().child("notifications").child(queryUser);
             }
 
             @Override
@@ -118,6 +133,12 @@ public class SingleQueryPage extends AppCompatActivity {
                 Query query=new Query(replyText.getText().toString(),uploadId,currUser,dateFormat.format(calendar.getTime()),uId);
                 mDatabaseRef.child(uploadId).setValue(query);
                 replyText.setText("");
+                String notiKey = notiDatabase.push().getKey();
+                calendar=Calendar.getInstance();
+                dateFormat=new SimpleDateFormat("MMMM dd,yyyy HH:mm:ss", Locale.US);
+                String time=dateFormat.format(calendar.getTime());
+                Notification newNoti= new Notification(currUser + " replied to your query",time);
+                notiDatabase.child(notiKey).setValue(newNoti);
                 Toast.makeText(getApplicationContext(),"Thanks for replying",Toast.LENGTH_LONG).show();
             }
         });

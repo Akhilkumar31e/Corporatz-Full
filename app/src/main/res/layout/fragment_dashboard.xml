@@ -20,7 +20,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/rate"
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="160dp"
                 android:layout_margin="5dp"
                 android:background="@color/cardview_dark_background"
@@ -52,7 +53,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/pooling"
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="160dp"
                 android:layout_margin="5dp"
                 android:background="@color/cardview_dark_background">
@@ -83,7 +85,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/wellbeing"
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="160dp"
                 android:layout_margin="5dp"
                 android:background="@color/cardview_dark_background">
@@ -123,7 +126,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/woman"
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="160dp"
                 android:layout_margin="5dp"
                 android:background="@color/cardview_dark_background">
@@ -154,7 +158,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/corporate"
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="160dp"
                 android:layout_margin="5dp"
                 android:background="@color/cardview_dark_background">
@@ -185,7 +190,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/smile"
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="160dp"
                 android:layout_margin="5dp"
                 android:background="@color/cardview_dark_background">
@@ -225,7 +231,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/lonely"
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="160dp"
                 android:layout_margin="5dp"
                 android:background="@color/cardview_dark_background">
@@ -256,7 +263,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/security"
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="160dp"
                 android:layout_margin="10dp"
                 android:background="@color/cardview_dark_background">
@@ -287,7 +295,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/partner"
-                android:layout_width="120dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="160dp"
                 android:layout_margin="5dp"
                 android:background="@color/cardview_dark_background">

@@ -1,55 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.dashboard.Rating.ReviewFragment">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10sp"
-        android:textColor="@color/colorText"
-        android:text="*Your Company Name"/>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:textColor="@color/colorText"
+                android:text="*Your Company Name"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10sp"
-        android:id="@+id/companyName"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10sp"
-        android:textColor="@color/colorText"
-        android:text="*Write a review about your employer."/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:id="@+id/companyName"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:textColor="@color/colorText"
+                android:text="*Write a review about your employer."/>
 
 
-    <EditText
-        android:id="@+id/review_text"
-        android:layout_margin="10sp"
-        android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:hint="Write text here min 10 characters"
-        android:background="@drawable/edittext"
-        >
+            <EditText
+                android:id="@+id/review_text"
+                android:layout_margin="10sp"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:hint="Write text here min 10 characters"
+                android:background="@drawable/edittext"
+                >
 
-        <requestFocus />
-    </EditText>
-    <Button
-        android:id="@+id/review_submit_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Submit Feedback"
-        android:background="@color/blue"
-        android:textColor="@color/white"
-        />
+                <requestFocus />
+            </EditText>
+            <Button
+                android:id="@+id/review_submit_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Submit Feedback"
+                android:background="@color/blue"
+                android:textColor="@color/white"
+                />
 
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
-
-
-</FrameLayout>

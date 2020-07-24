@@ -15,14 +15,17 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="Job name: "
-            android:textStyle="bold"
-            android:textSize="30dp"
+
+            android:textSize="25dp"
+            android:layout_margin="5dp"
             android:textColor="@color/black"/>
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:id="@+id/job_name"
             android:text="Job name"
@@ -33,15 +36,18 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-
+                android:textSize="25dp"
+                android:layout_margin="5dp"
                 android:text="Company: "
-                android:textStyle="bold"
-                android:textSize="30dp"
+
+
                 android:textColor="@color/black"/>
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/job_company_name"
                 android:text="Company"
@@ -52,15 +58,18 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:layout_margin="5dp"
+                android:text="Salary: "
 
-                android:text="Salary(in LPA): "
-                android:textStyle="bold"
-                android:textSize="30dp"
+
                 android:textColor="@color/black"/>
             <TextView
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:id="@+id/job_salary"
                 android:text="Salary"
@@ -71,19 +80,26 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-
+                android:textSize="25dp"
+                android:layout_margin="5dp"
                 android:text="Contact: "
-                android:textStyle="bold"
-                android:textSize="30dp"
+
+
                 android:textColor="@color/black"/>
             <Button
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:id="@+id/job_contact"
+                style="?android:textAppearanceMedium"
                 android:text="CALL"
-                android:textSize="25dp" />
+                android:background="@color/blue"
+                android:id="@+id/job_contact"
+                android:layout_marginRight="0dp"
+                android:textAlignment="center"
+                android:textColor="@color/white"/>
         </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

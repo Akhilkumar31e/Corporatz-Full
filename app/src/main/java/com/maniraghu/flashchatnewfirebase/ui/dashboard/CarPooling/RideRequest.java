@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.maniraghu.flashchatnewfirebase.R;
+import com.maniraghu.flashchatnewfirebase.ui.ProfilePageActivity;
 
 import java.util.List;
 
@@ -39,8 +40,17 @@ public class RideRequest extends RecyclerView.Adapter<RideRequest.RideRequestVie
             holder.destination.setText(current.getDestination());
             holder.source.setText(current.getSource());
             holder.riderName.setText(current.getNameOfPooler());
+            holder.riderName.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent next=new Intent(mContext, ProfilePageActivity.class);
+                    next.putExtra("userid",current.getUserId());
+                    mContext.startActivity(next);
+                }
+            });
             holder.gender.setText(current.getGender());
-            holder.price.setText("Price : "+current.getCost()+"/-");
+            if(current.getCost().equals("")) holder.price.setText("Price : Free");
+            else holder.price.setText("Price : ₹"+current.getCost());
             holder.time.setText("Time : "+current.getTime());
             final String call=current.getMobile();
             holder.mobile.setOnClickListener(new View.OnClickListener() {

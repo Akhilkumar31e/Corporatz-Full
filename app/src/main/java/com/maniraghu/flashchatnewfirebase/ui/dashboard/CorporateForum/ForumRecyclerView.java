@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.maniraghu.flashchatnewfirebase.R;
+import com.maniraghu.flashchatnewfirebase.ui.ProfilePageActivity;
 
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class ForumRecyclerView extends RecyclerView.Adapter<ForumRecyclerView.Fo
                 mContext.startActivity(singleQuery);
             }
         });
+
     }
 
     @Override

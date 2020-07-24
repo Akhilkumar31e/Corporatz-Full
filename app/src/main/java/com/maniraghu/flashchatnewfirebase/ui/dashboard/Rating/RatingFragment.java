@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RatingBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -539,8 +538,8 @@ public class RatingFragment extends BaseFragment implements View.OnClickListener
     public void database(View view) {
         RatingBar rating = (RatingBar) getActivity().findViewById(R.id.ratingBar);
         //add rating to database
-        final TextView comName = (TextView) getActivity().findViewById(R.id.tvCom);
-        final TextView comRating = (TextView) getActivity().findViewById(R.id.finalView);
+        //final TextView comName = (TextView) getActivity().findViewById(R.id.tvCom);
+        //final TextView comRating = (TextView) getActivity().findViewById(R.id.finalView);
         final EditText name = (EditText) getActivity().findViewById(R.id.companyName);
         final String companyName = name.getText().toString();
         boolean flag = true;
@@ -556,15 +555,15 @@ public class RatingFragment extends BaseFragment implements View.OnClickListener
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.hasChild(mUser.getUid())) {
                         Rating currRating = dataSnapshot.child(mUser.getUid()).getValue(Rating.class);
-                        comName.setText(currRating.getCompanyName());
-                        comRating.setText(currRating.getCompanyRating());
+                        //comName.setText(currRating.getCompanyName());
+                        //comRating.setText(currRating.getCompanyRating());
                         Toast.makeText(getActivity(), "You have already submitted your response", Toast.LENGTH_LONG).show();
                     } else {
-                        comName.setText(companyName);
+                        //comName.setText(companyName);
                         Log.d("companyName", companyName);
                         Log.d("rating", ratingVal + "");
 
-                        comRating.setText(ratingVal + "");
+                       // comRating.setText(ratingVal + "");
                         databaseReference.child(mUser.getUid()).setValue(r);
                         Toast.makeText(getActivity(), "Successfully posted your rating", Toast.LENGTH_LONG).show();
                     }

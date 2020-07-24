@@ -22,11 +22,10 @@
             android:id="@+id/result_tabs"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/gray"
-            app:tabIndicatorColor="@color/colorPrimary"
+
+
             app:tabMode="scrollable"
-            app:tabSelectedTextColor="@color/colorPrimary"
-            app:tabTextColor="@color/blue" />
+             />
     </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.viewpager.widget.ViewPager
@@ -38,7 +37,7 @@
 
         <Button
             android:id="@+id/view_ratings"
-            style="?android:textAppearanceMedium"
+            android:layout_margin="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/white"

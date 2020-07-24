@@ -2,24 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-
-    android:layout_margin="10dp"
-
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".ui.profile.FollowList"
+    >
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar"/>
 
     <ProgressBar
-        android:id="@+id/history_progress_circle"
+        android:id="@+id/follow_progress_circle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/history_recycler_view">
+        android:layout_height="wrap_content"
+        android:id="@+id/follow_recyclerview"
+        android:layout_margin="5dp"
+        android:layout_below="@+id/toolbar">
 
     </androidx.recyclerview.widget.RecyclerView>
-
 
 </RelativeLayout>

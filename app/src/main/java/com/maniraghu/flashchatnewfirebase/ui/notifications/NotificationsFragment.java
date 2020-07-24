@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
@@ -51,7 +52,7 @@ public class NotificationsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayOptions(ActionBar.DISPLAY_SHOW_TITLE);
         ((AppCompatActivity)getActivity()).getSupportActionBar()
                 .setTitle("Notifications");
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
@@ -101,16 +102,20 @@ public class NotificationsFragment extends Fragment {
                     }
                     i++;
                 }
+
                 Notification welcome = new Notification("Welcome to Corporatz","Thank you for joining us.");
-                dataset.add(welcome);
-                if(!uniq.containsKey(welcome.getDateString())) {
-                    uniq.put(welcome.getDateString(), i);
+                if(dataset.size()==0) {
+                    dataset.add(welcome);
+                    if (!uniq.containsKey(welcome.getDateString())) {
+                        uniq.put(welcome.getDateString(), i);
+                    }
                 }
                 i++;
                 for(String key: uniq.keySet()) {
                     sections.add(new SimpleSectionedRecyclerViewAdapter.Section(uniq.get(key), key));
                 }
-
+                //Collections.reverse(dataset);
+                //Collections.reverse(sections);
                 updateData(dataset, sections);
             }
 
