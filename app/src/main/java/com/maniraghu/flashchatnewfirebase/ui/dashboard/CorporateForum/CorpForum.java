@@ -44,7 +44,7 @@ public class CorpForum extends Fragment {
     private Button post;
     private EditText queryText;
     private FirebaseAuth mAuth;
-    private FirebaseUser user;
+    public static FirebaseUser user;
     private String uId,username,time;
     private DatabaseReference mDatabaseRef,mUserDatabase;
     private Calendar calendar;
@@ -108,12 +108,13 @@ public class CorpForum extends Fragment {
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                queryList.clear();
                 for(DataSnapshot ds:dataSnapshot.getChildren()){
                     Query q=ds.getValue(Query.class);
-                    if(!uniq.contains(q.getqQueryId())){
+                    //if(!uniq.contains(q.getqQueryId())){
                         queryList.add(q);
                         uniq.add(q.getqQueryId());
-                    }
+                   // }
                 }
                 Collections.reverse(queryList);
                 Forum=new ForumRecyclerView(getContext(),queryList);

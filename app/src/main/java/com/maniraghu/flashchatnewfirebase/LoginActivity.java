@@ -17,6 +17,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,6 +32,8 @@ public class LoginActivity extends AppCompatActivity {
     // UI references.
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
+    private TextInputLayout textInputLayoutEmail,textInputLayoutPass;
+    private InputValidation validate;
     int Request_code=1;
 
     @Override
@@ -39,7 +42,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-
+        validate=new InputValidation();
+        textInputLayoutEmail = (TextInputLayout) findViewById(R.id.til_login_email);
+        textInputLayoutPass =(TextInputLayout)findViewById(R.id.til_login_password);
         mEmailView = (AutoCompleteTextView) findViewById(R.id.login_email);
         mPasswordView = (EditText) findViewById(R.id.login_password);
 
@@ -68,6 +73,8 @@ public class LoginActivity extends AppCompatActivity {
     // Executed when Sign in button pressed
     public void signInExistingUser(View v)   {
         // TODO: Call attemptLogin() here
+        if(!(validate.validateName(mEmailView.getText().toString(),textInputLayoutEmail)
+                &&validate.validateName(mPasswordView.getText().toString(),textInputLayoutPass))) return ;
         attemptLogin();
     }
 

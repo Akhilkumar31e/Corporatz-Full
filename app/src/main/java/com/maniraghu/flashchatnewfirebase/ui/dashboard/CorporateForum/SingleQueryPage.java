@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,7 +45,7 @@ public class SingleQueryPage extends AppCompatActivity {
     private TextView time;
     private TextView desc;
     private DatabaseReference mReference;
-    private String query_id;
+    public static String query_id;
     private Button post;
     private EditText replyText;
     private FirebaseAuth mAuth;
@@ -53,6 +54,8 @@ public class SingleQueryPage extends AppCompatActivity {
     private DatabaseReference mDatabaseRef,mUserDatabase,mReplyDatabase,notiDatabase;
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
+    private ImageButton delete;
+    private Query q=null;
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
@@ -77,34 +80,9 @@ public class SingleQueryPage extends AppCompatActivity {
         time=findViewById(R.id.single_query_post_time);
         desc=findViewById(R.id.single_query_desc);
         query_id=getIntent().getStringExtra("queryId");
+        delete=findViewById(R.id.deleteQueryButton);
         String path="forum/"+query_id;
         mReference= FirebaseDatabase.getInstance().getReference(path);
-
-        mReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                final Query q=dataSnapshot.getValue(Query.class);
-                username.setText(q.getqUsername());
-                username.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent next=new Intent(getApplicationContext(), ProfilePageActivity.class);
-                        next.putExtra("userid",q.getqId());
-                        startActivity(next);
-                    }
-                });
-                time.setText(q.getqTime());
-                desc.setText(q.getqQuery());
-                queryUser=q.getqId();
-                notiDatabase = FirebaseDatabase.getInstance().getReference().child("notifications").child(queryUser);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
         //To store reply in database
         String replyPath="replies";
         mDatabaseRef = FirebaseDatabase.getInstance().getReference(replyPath).child(query_id);
@@ -115,6 +93,49 @@ public class SingleQueryPage extends AppCompatActivity {
         calendar=Calendar.getInstance();
         dateFormat=new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
         //time=dateFormat.format(calendar.getTime());
+
+        mReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                 q=dataSnapshot.getValue(Query.class);
+                if(q!=null&&q.getqId().equals(uId)){
+                    delete.setVisibility(View.VISIBLE);
+                    delete.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            mReference.removeValue();
+                        }
+                    });
+                }
+                if(q==null){
+                    desc.setText("Query unavailable");
+                }
+                else {
+                    username.setText(q.getqUsername());
+                    username.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            Intent next = new Intent(getApplicationContext(), ProfilePageActivity.class);
+                            next.putExtra("userid", q.getqId());
+                            startActivity(next);
+                        }
+                    });
+                    time.setText(q.getqTime());
+                    desc.setText(q.getqQuery());
+                    queryUser = q.getqId();
+                    notiDatabase = FirebaseDatabase.getInstance().getReference().child("notifications").child(queryUser);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
         mUserDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -151,12 +172,13 @@ public class SingleQueryPage extends AppCompatActivity {
         mReplyDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                queryList.clear();
                 for(DataSnapshot ds:dataSnapshot.getChildren()){
                     Query q=ds.getValue(Query.class);
-                    if(!uniq.contains(q.getqQueryId())){
+                   // if(!uniq.contains(q.getqQueryId())){
                         queryList.add(q);
                         uniq.add(q.getqQueryId());
-                    }
+                    //}
                 }
                 Collections.reverse(queryList);
                 Reply=new ReplyRecyclerView(getApplicationContext(),queryList);

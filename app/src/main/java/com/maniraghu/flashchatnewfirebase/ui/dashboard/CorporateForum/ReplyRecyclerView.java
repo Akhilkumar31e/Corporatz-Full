@@ -5,11 +5,16 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.maniraghu.flashchatnewfirebase.R;
 import com.maniraghu.flashchatnewfirebase.ui.ProfilePageActivity;
 
@@ -18,10 +23,14 @@ import java.util.List;
 public class ReplyRecyclerView extends RecyclerView.Adapter<ReplyRecyclerView.ReplyViewHolder> {
     private Context mContext;
     private List<Query> mReplyList;
+    private DatabaseReference replyDatabase;
+    private FirebaseUser user;
 
     public ReplyRecyclerView(Context mContext, List<Query> mReplyList) {
         this.mContext = mContext;
         this.mReplyList = mReplyList;
+        user= FirebaseAuth.getInstance().getCurrentUser();
+        replyDatabase= FirebaseDatabase.getInstance().getReference().child("replies");
     }
 
     @NonNull
@@ -47,6 +56,16 @@ public class ReplyRecyclerView extends RecyclerView.Adapter<ReplyRecyclerView.Re
                 mContext.startActivity(next);
             }
         });
+        String uId=user.getUid();
+        if(uId.equals(queries.getqId())){
+            holder.delete.setVisibility(View.VISIBLE);
+            holder.delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    replyDatabase.child(SingleQueryPage.query_id).child(post_key).removeValue();
+                }
+            });
+        }
     }
 
     @Override
@@ -59,12 +78,14 @@ public class ReplyRecyclerView extends RecyclerView.Adapter<ReplyRecyclerView.Re
         public TextView desc;
         public TextView username;
         public TextView time;
+        public ImageButton delete;
         public ReplyViewHolder(View itemView) {
             super(itemView);
             mView=itemView;
             username=itemView.findViewById(R.id.reply_username);
             desc = itemView.findViewById(R.id.reply_desc);
             time=itemView.findViewById(R.id.reply_post_time);
+            delete=itemView.findViewById(R.id.deleteReplyButton);
         }
     }
 }

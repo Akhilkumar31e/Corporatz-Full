@@ -61,6 +61,7 @@ public class profile extends BaseFragment {
     private LinearLayout editProfile;
     public  FirebaseUser user;
     private ImageView profilePic;
+    private LinearLayout followers_layout,following_layout;
     public static profile newInstance() {
         return new profile();
     }
@@ -81,6 +82,10 @@ public class profile extends BaseFragment {
                 .setTitle("Profile");
         ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(false);
 
+        followers=getActivity().findViewById(R.id.my_followers);
+        following=getActivity().findViewById(R.id.my_following);
+        followers_layout=getActivity().findViewById(R.id.my_followers_layout);
+        following_layout=getActivity().findViewById(R.id.my_following_layout);
         mAuth=FirebaseAuth.getInstance();
         mFirebaseDatabase=FirebaseDatabase.getInstance();
         myRef=mFirebaseDatabase.getReference("Users");
@@ -171,12 +176,12 @@ public class profile extends BaseFragment {
             }
         });
         listView= (ExpandableListView)getActivity().findViewById(R.id.expand);
+
+
+
         initData();
         listAdapter = new ExpandableList(getContext(),listDataHeader,listHash);
         listView.setAdapter(listAdapter);
-        followers=getActivity().findViewById(R.id.my_followers);
-        following=getActivity().findViewById(R.id.my_following);
-
 
     }
     public void out(){
@@ -253,7 +258,7 @@ public class profile extends BaseFragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         followers.setText(String.valueOf(dataSnapshot.child("Followers").child(userId).getChildrenCount()));
-                        followers.setOnClickListener(new View.OnClickListener() {
+                        followers_layout.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Intent next=new Intent(getContext(), FollowList.class);
@@ -263,7 +268,7 @@ public class profile extends BaseFragment {
                             }
                         });
                         following.setText(String.valueOf(dataSnapshot.child("Following").child(userId).getChildrenCount()));
-                        following.setOnClickListener(new View.OnClickListener() {
+                        following_layout.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Intent next=new Intent(getContext(), FollowList.class);

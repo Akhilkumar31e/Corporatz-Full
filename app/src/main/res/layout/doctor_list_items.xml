@@ -11,22 +11,24 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
                     android:layout_height="wrap_content"
                     android:text="Name : "
                     android:textStyle="bold"
                     android:textSize="20dp"
                     android:textColor="@color/black"/>
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/item_doctor_name"
                     android:text="Name"
@@ -34,18 +36,20 @@
                     android:textStyle="bold" />
             </LinearLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:text="Qualification : "
                     android:textColor="@color/black"
                     android:textSize="20dp"/>
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/item_qualification"
                     android:text="Qualification : "
@@ -54,18 +58,20 @@
                     />
             </LinearLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.7"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:text="Hospital Name : "
                     android:textColor="@color/black"
                     android:textSize="20dp"/>
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/item_hospital"
                     android:text="Hospital"
@@ -73,18 +79,20 @@
                     android:textStyle="bold" />
             </LinearLayout>
             <LinearLayout
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:text="Timings : "
                     android:textColor="@color/black"
                     android:textSize="20dp"/>
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:id="@+id/item_timings"
                     android:text="Timings"
@@ -93,24 +101,17 @@
 
             </LinearLayout>
 
-        </LinearLayout>
 
         <Button
             android:id="@+id/item_doctor_call"
             style="?android:textAppearanceMedium"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
             android:layout_marginTop="16dp"
             android:background="@color/blue"
-
             android:text="Contact"
             android:textColor="@color/white"
             android:textStyle="bold" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/white"/>
+        </LinearLayout>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

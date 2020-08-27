@@ -5,19 +5,20 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.maniraghu.flashchatnewfirebase.R;
-import com.maniraghu.flashchatnewfirebase.ui.ProfilePageActivity;
 
 import java.util.List;
 
 public class ForumRecyclerView extends RecyclerView.Adapter<ForumRecyclerView.ForumViewHolder> {
     private Context mContext;
     private List<Query> mQueryList;
+
 
     public ForumRecyclerView(Context mContext, List<Query> mQueryList) {
         this.mContext = mContext;
@@ -35,6 +36,7 @@ public class ForumRecyclerView extends RecyclerView.Adapter<ForumRecyclerView.Fo
     public void onBindViewHolder(@NonNull ForumViewHolder holder, int position) {
         final Query queries=mQueryList.get(position);
         final String post_key=queries.getqQueryId();
+
         holder.username.setText(queries.getqUsername()+" posted a query");
         holder.time.setText(queries.getqTime());
         holder.desc.setText(queries.getqQuery());
@@ -46,6 +48,7 @@ public class ForumRecyclerView extends RecyclerView.Adapter<ForumRecyclerView.Fo
                 mContext.startActivity(singleQuery);
             }
         });
+
 
     }
 
@@ -59,12 +62,14 @@ public class ForumRecyclerView extends RecyclerView.Adapter<ForumRecyclerView.Fo
         public TextView desc;
         public TextView username;
         public TextView time;
+        public ImageButton delete;
         public ForumViewHolder(View itemView) {
             super(itemView);
             mView=itemView;
             username=itemView.findViewById(R.id.query_username);
             desc = itemView.findViewById(R.id.query_desc);
             time=itemView.findViewById(R.id.query_post_time);
+            delete=itemView.findViewById(R.id.deleteQueryButton);
         }
     }
 }

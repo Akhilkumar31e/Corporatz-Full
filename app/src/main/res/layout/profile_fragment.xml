@@ -110,6 +110,7 @@
             android:paddingTop="5dp">
 
             <LinearLayout
+                android:id="@+id/my_followers_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
@@ -146,6 +147,7 @@
             android:paddingTop="5dp">
 
             <LinearLayout
+                android:id="@+id/my_following_layout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"

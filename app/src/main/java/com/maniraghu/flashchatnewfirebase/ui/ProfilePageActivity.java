@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -52,6 +53,7 @@ public class ProfilePageActivity extends AppCompatActivity {
     private boolean processFollow;
     private Calendar calendar;
     private SimpleDateFormat dateFormat;
+    private LinearLayout followers_layout,following_layout;
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -76,6 +78,9 @@ public class ProfilePageActivity extends AppCompatActivity {
         following=findViewById(R.id.profile_following);
         listView= (ExpandableListView)findViewById(R.id.profile_expand);
         profilePic=findViewById(R.id.profile_other_user_image);
+        followers_layout=findViewById(R.id.profile_followers_layout);
+        following_layout=findViewById(R.id.profile_following_layout);
+
 
         final String userId=getIntent().getExtras().getString("userid");
 
@@ -129,7 +134,7 @@ public class ProfilePageActivity extends AppCompatActivity {
                             }
                         }
                         followers.setText(String.valueOf(dataSnapshot.child("Followers").child(userId).getChildrenCount()));
-                        followers.setOnClickListener(new View.OnClickListener() {
+                        followers_layout.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Intent next=new Intent(getApplicationContext(), FollowList.class);
@@ -139,7 +144,7 @@ public class ProfilePageActivity extends AppCompatActivity {
                             }
                         });
                         following.setText(String.valueOf(dataSnapshot.child("Following").child(userId).getChildrenCount()));
-                        following.setOnClickListener(new View.OnClickListener() {
+                        following_layout.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
                                 Intent next=new Intent(getApplicationContext(), FollowList.class);

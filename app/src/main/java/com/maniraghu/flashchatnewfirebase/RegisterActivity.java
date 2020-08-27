@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -39,8 +40,10 @@ public class RegisterActivity extends AppCompatActivity {
     private AutoCompleteTextView mCompanyNameView;
     private AutoCompleteTextView mRegionView;
     private AutoCompleteTextView mDobView;
+    private TextInputLayout textInputLayoutUser,textInputLayoutEmail,textInputLayoutGender,textInputLayoutCMail,textInputLayoutCName,textInputLayoutRegion,textInputLayoutDob,textInputLayoutPassword,textInputLayoutCPassword;
     private EditText mPasswordView;
     private EditText mConfirmPasswordView;
+    private InputValidation validate;
 
     // Firebase instance variables
     private FirebaseAuth mAuth;
@@ -51,6 +54,18 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        validate=new InputValidation();
+        textInputLayoutUser=(TextInputLayout) findViewById(R.id.tilname);
+        textInputLayoutEmail=(TextInputLayout) findViewById(R.id.tilemail);
+        textInputLayoutCName=(TextInputLayout) findViewById(R.id.tilcname);
+        textInputLayoutCMail=(TextInputLayout) findViewById(R.id.tilcmail);
+        textInputLayoutDob=(TextInputLayout) findViewById(R.id.tildob);
+        textInputLayoutGender=(TextInputLayout) findViewById(R.id.tilgender);
+        textInputLayoutRegion=(TextInputLayout) findViewById(R.id.tilregion);
+        textInputLayoutPassword=(TextInputLayout) findViewById(R.id.tilpass);
+        textInputLayoutCPassword=(TextInputLayout) findViewById(R.id.tilcpass);
+
+
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.register_email);
         mPasswordView = (EditText) findViewById(R.id.register_password);
@@ -80,8 +95,23 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+    public void validateForm(){
+        if(!(validate.validateUsername(mUsernameView.getText().toString(),textInputLayoutUser)
+                &&validate.validateEmail(mEmailView.getText().toString(),textInputLayoutEmail)
+                &&validate.validateName(mCompanyNameView.getText().toString(),textInputLayoutCName)
+                &&validate.validateEmail(mCompanymailidView.getText().toString(),textInputLayoutCMail)
+                &&validate.validateDOB(mDobView.getText().toString(),textInputLayoutDob)
+                &&validate.validateGender(mGenderView.getText().toString(),textInputLayoutGender)
+                &&validate.validatePassword(mPasswordView.getText().toString(),textInputLayoutPassword)
+                &&validate.validateConfirmPassword(mConfirmPasswordView.getText().toString(),mPasswordView.getText().toString(),textInputLayoutCPassword))){
+            return;
+        }
+
+    }
+
     // Executed when Sign Up button is pressed.
     public void signUp(View v) {
+        validateForm();
         attemptRegistration();
     }
 
